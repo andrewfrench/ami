@@ -38,6 +38,11 @@ var register_array = [
 ];
 
 var Registers = {
+  PC: {
+      mutable: true,
+      value: 0x00400000
+  },
+
   $zero: {
     mutable: false,
     value: 0
