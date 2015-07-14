@@ -10,7 +10,6 @@ var Instructions = {
     argument_format: "rrr",
     operation: function(arguments) {
       arguments[0].value = arguments[1].value + arguments[2].value;
-      console.log(arguments[0]);
     }
   },
 
@@ -20,47 +19,51 @@ var Instructions = {
     argument_format: "rri",
     operation: function(arguments) {
       arguments[0].value = arguments[1].value + arguments[2];
-      console.log(arguments[0]);
     }
   },
 
   ADDIU: {
     desc: "Add immediate unsigned (no overflow)",
     arguments: 3,
-    operation: function(t, s, i) {
-      t.value = s.value + i;
+    argument_format: "rri",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value + arguments[2];
     }
   },
 
   ADDU: {
     desc: "Add unsigned (no overflow)",
     arguments: 3,
-    operation: function(d, s, t) {
-      d.value = s.value + t.value;
+    argument_format: "rrr",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value + arguments[2].value;
     }
   },
 
   AND: {
     desc: "Bitwise logical and",
     arguments: 3,
-    operation: function(d, s, t) {
-      d.value = s.value & t.value;
+    argument_format: "rrr",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value & arguments[2].value;
     }
   },
 
   OR: {
     desc: "Bitwise logical or",
     arguments: 3,
-    operation: function(d, s, t) {
-      d.value = s.value | t.value;
+    argument_format: "rrr",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value | arguments[2].value;
     }
   },
 
   SLL: {
     desc: "Shift left logical",
     arguments: 3,
-    operation: function(d, t, h) {
-      d.value = t.value << h;
+    argument_format: "rri",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value << arguments[2];
     }
   }
 

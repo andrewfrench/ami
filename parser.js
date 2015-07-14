@@ -93,7 +93,7 @@ var Parser = {
         case "l":
           // Parse labels
           break;
-          
+
         default:
           console.log("Error: malformed argument format string.");
       }

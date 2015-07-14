@@ -2,14 +2,53 @@
 <head>
   <title>ami</title>
   <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>ami</h1>
+  <div>Using MIPS implementation information from <a href="http://www.mrc.uidaho.edu/mrc/people/jff/digital/MIPSir.html" target="_blank">http://www.mrc.uidaho.edu/mrc/people/jff/digital/MIPSir.html</a></div>
+  <div id="left">
+    <textarea id="main"></textarea>
+    <button id="evaluate">Evaluate</button>
+  </div>
+  <div id="right">
+    <div><span class="register">$0: </span> <span class="value" id="$zero">0</span></div>
+    <div><span class="register">$at: </span> <span class="value" id="$at">0</span></div>
+    <div><span class="register">$v0: </span> <span class="value" id="$v0">0</span></div>
+    <div><span class="register">$v1: </span> <span class="value" id="$v1">0</span></div>
+    <div><span class="register">$a0: </span> <span class="value" id="$a0">0</span></div>
+    <div><span class="register">$a2: </span> <span class="value" id="$a1">0</span></div>
+    <div><span class="register">$a3: </span> <span class="value" id="$a2">0</span></div>
+    <div><span class="register">$a1: </span> <span class="value" id="$a3">0</span></div>
+    <div><span class="register">$t0: </span> <span class="value" id="$t0">0</span></div>
+    <div><span class="register">$t1: </span> <span class="value" id="$t1">0</span></div>
+    <div><span class="register">$t2: </span> <span class="value" id="$t2">0</span></div>
+    <div><span class="register">$t3: </span> <span class="value" id="$t3">0</span></div>
+    <div><span class="register">$t4: </span> <span class="value" id="$t4">0</span></div>
+    <div><span class="register">$t5: </span> <span class="value" id="$t5">0</span></div>
+    <div><span class="register">$t6: </span> <span class="value" id="$t6">0</span></div>
+    <div><span class="register">$t7: </span> <span class="value" id="$t7">0</span></div>
+    <div><span class="register">$s0: </span> <span class="value" id="$s0">0</span></div>
+    <div><span class="register">$s1: </span> <span class="value" id="$s1">0</span></div>
+    <div><span class="register">$s2: </span> <span class="value" id="$s2">0</span></div>
+    <div><span class="register">$s3: </span> <span class="value" id="$s3">0</span></div>
+    <div><span class="register">$s4: </span> <span class="value" id="$s4">0</span></div>
+    <div><span class="register">$s5: </span> <span class="value" id="$s5">0</span></div>
+    <div><span class="register">$s6: </span> <span class="value" id="$s6">0</span></div>
+    <div><span class="register">$s7: </span> <span class="value" id="$s7">0</span></div>
+    <div><span class="register">$t8: </span> <span class="value" id="$t8">0</span></div>
+    <div><span class="register">$t9: </span> <span class="value" id="$t9">0</span></div>
+    <div><span class="register">$k0: </span> <span class="value" id="$k0">0</span></div>
+    <div><span class="register">$k1: </span> <span class="value" id="$k1">0</span></div>
+    <div><span class="register">$gp: </span> <span class="value" id="$gp">0</span></div>
+    <div><span class="register">$sp: </span> <span class="value" id="$sp">0</span></div>
+    <div><span class="register">$fp: </span> <span class="value" id="$fp">0</span></div>
+    <div><span class="register">$ra: </span> <span class="value" id="$ra">0</span></div>
+
+  </div>
   <script src="test.js"></script>
   <script src="registers.js"></script>
   <script src="instructions.js"></script>
   <script src="parser.js"></script>
   <script src="main.js"></script>
-</head>
-<body>
-  <h1>ami</h1>
-  <div>Using MIPS implementation information from <a href="http://www.mrc.uidaho.edu/mrc/people/jff/digital/MIPSir.html" target="_blank">http://www.mrc.uidaho.edu/mrc/people/jff/digital/MIPSir.html</a></div>
 </body>
 </html>
