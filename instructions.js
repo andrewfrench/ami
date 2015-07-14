@@ -7,8 +7,10 @@ var Instructions = {
   ADD: {
     desc: "Add (with overflow)",
     arguments: 3,
-    operation: function(d, s, t) {
-      d.value = s.value + t.value;
+    argument_format: "rrr",
+    operation: function(registers) {
+      registers[0].value = registers[1].value + registers[2].value;
+      console.log(registers[0]);
     }
   },
 

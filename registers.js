@@ -37,163 +37,163 @@ var registers_by_number = [
   "ra"
 ];
 
-var registers = {
-  zero: {
+var Registers = {
+  $zero: {
     mutable: false,
     value: 0
   },
 
-  at: {
+  $at: {
     mutable: false,
     value: null
   },
 
-  v0: {
+  $v0: {
     mutable: true,
     value: 0
   },
 
-  v1: {
+  $v1: {
     mutable: true,
     value: 0
   },
 
-  a0: {
+  $a0: {
     mutable: true,
     value: 0
   },
 
-  a1: {
+  $a1: {
     mutable: true,
     value: 0
   },
 
-  a2: {
+  $a2: {
     mutable: true,
     value: 0
   },
 
-  a3: {
+  $a3: {
     mutable: true,
     value: 0
   },
 
-  t0: {
+  $t0: {
     mutable: true,
     value: 0
   },
 
-  t1: {
+  $t1: {
     mutable: true,
     value: 0
   },
 
-  t2: {
+  $t2: {
     mutable: true,
     value: 0
   },
 
-  t3: {
+  $t3: {
     mutable: true,
     value: 0
   },
 
-  t4: {
+  $t4: {
     mutable: true,
     value: 0
   },
 
-  t5: {
+  $t5: {
     mutable: true,
     value: 0
   },
 
-  t6: {
+  $t6: {
     mutable: true,
     value: 0
   },
 
-  t7: {
+  $t7: {
     mutable: true,
     value: 0
   },
 
-  s0: {
+  $s0: {
     mutable: true,
     value: 0
   },
 
-  s1: {
+  $s1: {
     mutable: true,
     value: 0
   },
 
-  s2: {
+  $s2: {
     mutable: true,
     value: 0
   },
 
-  s3: {
+  $s3: {
     mutable: true,
     value: 0
   },
 
-  s4: {
+  $s4: {
     mutable: true,
     value: 0
   },
 
-  s5: {
+  $s5: {
     mutable: true,
     value: 0
   },
 
-  s6: {
+  $s6: {
     mutable: true,
     value: 0
   },
 
-  s7: {
+  $s7: {
     mutable: true,
     value: 0
   },
 
-  t8: {
+  $t8: {
     mutable: true,
     value: 0
   },
 
-  t9: {
+  $t9: {
     mutable: true,
     value: 0
   },
 
-  k0: {
+  $k0: {
     mutable: false,
     value: 0
   },
 
-  k1: {
+  $k1: {
     mutable: false,
     value: 0
   },
 
-  gp: {
+  $gp: {
     mutable: true,
     value: 0
   },
 
-  sp: {
+  $sp: {
     mutable: true,
     value: 0
   },
 
-  fp: {
+  $fp: {
     mutable: true,
     value: 0
   },
 
-  ra: {
+  $ra: {
     mutable: true,
     value: 0
   }
