@@ -5,6 +5,15 @@ var Parser = {
 
     // Inspect each argument in order
     for(var i = 0; i < instruction_list.length; i++) {
+
+      // TODO: ignore comments
+      // TODO: ignore whitespace
+      // TODO: whitespace delimiting flexibility
+      // TODO: parse labels
+
+      // Add instruction to Program object
+      Program.add_instruction(instruction_list[i]);
+
       var instruction_elements = instruction_list[i].split(" ");
 
       this.strip_commas_from_instruction(instruction_elements);
