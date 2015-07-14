@@ -7,7 +7,9 @@ document.getElementById("evaluate").onclick = function() {
   Parser.parse(code_lines);
 
   for(var i = 0; i < register_array.length; i++) {
-    document.getElementById(register_array[i]).innerHTML = Registers[register_array[i]].value;
-    console.log(register_array[i] + ": " + Registers[register_array[i]].value);
+    var hex_value = Registers[register_array[i]].value.toString(16);
+    hex_value = Array(9 - hex_value.length).join("0") + hex_value;
+    hex_value = "0x" + hex_value;
+    document.getElementById(register_array[i]).innerHTML = hex_value;
   }
 }
