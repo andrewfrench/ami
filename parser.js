@@ -30,7 +30,7 @@ var Parser = {
       }
 
       // Convert arguments to registers
-      var instruction_registers = this.convert_arguments_to_registers(instruction_elements[0], instruction_arguments);
+      var instruction_registers = this.convert_arguments(instruction_elements[0], instruction_arguments);
 
       Instructions[instruction_elements[0]].operation(instruction_registers);
     }
@@ -70,19 +70,34 @@ var Parser = {
     return true;
   },
 
-  convert_arguments_to_registers: function(instruction, arguments) {
-    var register_array = [];
+  convert_arguments: function(instruction, arguments) {
+    /*
+     * Converts register identifiers to register objects, parses
+     * immediates, and parses labels for use by instructions.
+     */
+
+    var converted_array = [];
     var format_array = Instructions[instruction].argument_format.split("");
     for(var i = 0; i < format_array.length; i++) {
       switch(format_array[i]) {
         case "r":
-          register_array.push(Registers[arguments[i]]);
+          // Add the register object to the array
+          converted_array.push(Registers[arguments[i]]);
           break;
 
+        case "i":
+          // Add the immediate value to the array without alteration
+          converted_array.push(parseInt(arguments[i]));
+          break;
+
+        case "l":
+          // Parse labels
+          break;
+          
         default:
           console.log("Error: malformed argument format string.");
       }
     }
-    return register_array;
+    return converted_array;
   }
 };

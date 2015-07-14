@@ -8,17 +8,19 @@ var Instructions = {
     desc: "Add (with overflow)",
     arguments: 3,
     argument_format: "rrr",
-    operation: function(registers) {
-      registers[0].value = registers[1].value + registers[2].value;
-      console.log(registers[0]);
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value + arguments[2].value;
+      console.log(arguments[0]);
     }
   },
 
   ADDI: {
     desc: "Add immediate (with overflow)",
     arguments: 3,
-    operation: function(t, s, i) {
-      t.value = s.value + i;
+    argument_format: "rri",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value + arguments[2];
+      console.log(arguments[0]);
     }
   },
 

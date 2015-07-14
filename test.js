@@ -1,5 +1,5 @@
 // test.js
 
 var Test = {
-  command_list: ["ADD $t1, $t2, $t3"]
+  command_list: ["ADDI $t1, $t2, 404", "ADD $t0, $t1, $t1"]
 };
