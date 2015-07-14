@@ -1,5 +1,7 @@
 // registers.js
 
+// Registers are 32 bits wide (0x0000)
+
 var registers_by_number = [
   "zero",
   "at",
