@@ -30,9 +30,9 @@ var Parser = {
       }
 
       // Convert arguments to registers
-      var instruction_registers = this.convert_arguments(instruction_elements[0], instruction_arguments);
+      var converted_arguments = this.convert_arguments(instruction_elements[0], instruction_arguments);
 
-      Instructions[instruction_elements[0]].operation(instruction_registers);
+      Instructions[instruction_elements[0]].operation(converted_arguments);
     }
   },
 
