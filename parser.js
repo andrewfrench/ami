@@ -11,10 +11,17 @@ var Parser = {
       // TODO: whitespace delimiting flexibility
       // TODO: parse labels
 
+      // Change structure to scrub whitespace and comments from
+      // code first, then add each instruction and label to
+      // Program object and assign PC numbers. Then, each
+      // instruction is sent to Parser to be parsed and executed.
+      // Parse first, then add parsed instructions to Program array,
+      // then send to controller?
+
       // Add instruction to Program object
       Program.add_instruction(instruction_list[i]);
 
-      var instruction_elements = instruction_list[i].split(" ");
+      var instruction_elements = instruction_list[i].match(/\S+/g);
 
       this.strip_commas_from_instruction(instruction_elements);
 
