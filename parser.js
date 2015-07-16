@@ -6,9 +6,7 @@ var Parser = {
     // Inspect each argument in order
     for(var i = 0; i < instruction_list.length; i++) {
 
-      // TODO: ignore comments
       // TODO: parse labels
-      // TODO: split on commas AND commas + spaces
 
       // Change structure to scrub whitespace and comments from
       // code first, then add each instruction and label to
@@ -19,6 +17,12 @@ var Parser = {
 
       // Add instruction to Program object
       Program.add_instruction(instruction_list[i]);
+
+      // Remove commented out portions of lines
+      var comment_delimited_chunks = instruction_list[i].split("#");
+
+      // Only keep portions to the left of any comment delimiters.
+      instruction_list[i] = comment_delimited_chunks[0];
 
       // Pad commas with at least one confirmed space
       instruction_list[i] = instruction_list[i].replace(/,/g, ", ");
