@@ -7,9 +7,8 @@ var Parser = {
     for(var i = 0; i < instruction_list.length; i++) {
 
       // TODO: ignore comments
-      // TODO: ignore whitespace
-      // TODO: whitespace delimiting flexibility
       // TODO: parse labels
+      // TODO: split on commas AND commas + spaces
 
       // Change structure to scrub whitespace and comments from
       // code first, then add each instruction and label to
@@ -21,6 +20,9 @@ var Parser = {
       // Add instruction to Program object
       Program.add_instruction(instruction_list[i]);
 
+      // Pad commas with at least one confirmed space
+      instruction_list[i] = instruction_list[i].replace(/,/g, ", ");
+
       // Confirm that each line contains non-whitespace characters
       if(/\S/.test(instruction_list[i])) {
         var instruction_elements = instruction_list[i].match(/\S+/g);
@@ -28,8 +30,7 @@ var Parser = {
         continue;
       }
 
-      // var instruction_elements = instruction_list[i].match(/\S+/g);
-
+      // Remove commas from instruction, instruction delimited by whitespace.
       this.strip_commas_from_instruction(instruction_elements);
 
       if(!this.check_instruction_validity(instruction_elements[0])) {
