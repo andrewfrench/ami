@@ -89,7 +89,14 @@ var Instructions = {
 
   // MULTU
 
-  // NOOP
+  NOOP: {
+    desc: "No operation",
+    arguments: 0,
+    argument_format: "",
+    operation: function(arguments) {
+      // A formality
+    }
+  },
 
   OR: {
     desc: "Bitwise logical or",
