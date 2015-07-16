@@ -21,7 +21,14 @@ var Parser = {
       // Add instruction to Program object
       Program.add_instruction(instruction_list[i]);
 
-      var instruction_elements = instruction_list[i].match(/\S+/g);
+      // Confirm that each line contains non-whitespace characters
+      if(/\S/.test(instruction_list[i])) {
+        var instruction_elements = instruction_list[i].match(/\S+/g);
+      } else {
+        continue;
+      }
+
+      // var instruction_elements = instruction_list[i].match(/\S+/g);
 
       this.strip_commas_from_instruction(instruction_elements);
 
