@@ -18,16 +18,17 @@ textarea#main {
   height: 624px;
   resize: none;
   font-size: inherit;
+  font-family: "Droid Sans Mono", monospace;
 }
 
 div.register {
   display: inline-block;
   width: 40px;
-  font-family: monospace;
+  font-family: "Droid Sans Mono", monospace;
 }
 
 div.value {
   display: inline-block;
   width: 100px;
-  font-family: monospace;
+  font-family: "Droid Sans Mono", monospace;
 }
