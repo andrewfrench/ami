@@ -14,7 +14,7 @@ var Instructions = {
   },
 
   ADDI: {
-    desc: "Add immediate (with overflow)",
+    desc: "Add immediate value (with overflow)",
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
@@ -23,7 +23,7 @@ var Instructions = {
   },
 
   ADDIU: {
-    desc: "Add immediate unsigned (no overflow)",
+    desc: "Add immediate unsigned value (no overflow)",
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
@@ -58,12 +58,52 @@ var Instructions = {
     }
   },
 
+  ORI: {
+    desc: "Bitwise logical or with immediate value",
+    arguments: 3,
+    argument_format: "rri",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value | arguments[2];
+    }
+  },
+
   SLL: {
     desc: "Shift left logical",
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
       arguments[0].value = arguments[1].value << arguments[2];
+    }
+  },
+
+  SLT: {
+    desc: "Set on less than (signed)",
+    arguments: 3,
+    argument_format: "rrr",
+    operation: function(arguments) {
+      if(arguments[1].value < arguments[2].value) {
+        arguments[0].value = 1;
+      } else {
+        arguments[0].value = 0;
+      }
+    }
+  },
+
+  XOR: {
+    desc: "Bitwise exclusive or",
+    arguments: 3,
+    argument_format: "rrr",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value ^ arguments[2].value;
+    }
+  },
+
+  XORI: {
+    desc: "Bitwise exclusive or with immediate value",
+    arguments: 3,
+    argument_format: "rri",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value ^ arguments[2];
     }
   }
 
