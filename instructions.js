@@ -49,6 +49,48 @@ var Instructions = {
     }
   },
 
+  // BEQ
+
+  // BGEZ
+
+  // BGEZAL
+
+  // BGTZ
+
+  // BLEZ
+
+  // BLTZ
+
+  // BLTZAL
+
+  // BNE
+
+  // DIV
+
+  // DIVU
+
+  // J
+
+  // JAL
+
+  // JR
+
+  // LB
+
+  // LUI
+
+  // LW
+
+  // MFHI
+
+  // MFLO
+
+  // MULT
+
+  // MULTU
+
+  // NOOP
+
   OR: {
     desc: "Bitwise logical or",
     arguments: 3,
@@ -67,12 +109,23 @@ var Instructions = {
     }
   },
 
+  // SB
+
   SLL: {
-    desc: "Shift left logical",
+    desc: "Logical shift left",
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
       arguments[0].value = arguments[1].value << arguments[2];
+    }
+  },
+
+  SLLV: {
+    desc: "Variable logical shift left",
+    arguments: 3,
+    argument_format: "rrr",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value << arguments[2].value;
     }
   },
 
@@ -88,6 +141,53 @@ var Instructions = {
       }
     }
   },
+
+  SLTI: {
+    desc: "Set on less than immediate value (signed)",
+    arguments: 3,
+    argument_format: "rri",
+    operation: function(arguments) {
+      if(arguments[1].value < arguments[2]) {
+        arguments[0].value = 1;
+      } else {
+        arguments[0].value = 0;
+      }
+    }
+  },
+
+  // SLTI
+
+  // SLTIU
+
+  // SLTU
+
+  SRA: {
+    desc: "Arithmetic shift right",
+    arguments: 3,
+    argument_format: "rri",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value >> arguments[2];
+    }
+  },
+
+  // SRL
+
+  // SRLV
+
+  SUB: {
+    desc: "Subtract",
+    arguments: 3,
+    argument_format: "rrr",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value - arguments[2].value;
+    }
+  },
+
+  // SUBU
+
+  // SW
+
+  // SYSCALL
 
   XOR: {
     desc: "Bitwise exclusive or",
