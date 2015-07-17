@@ -49,28 +49,104 @@ var Instructions = {
     }
   },
 
-  // BEQ
+  BEQ: {
+    desc: "Branches if two registers are equal",
+    arguments: 3,
+    argument_format: "rri",
+    operation: function(arguments) {
+      if(arguments[0].value == arguments[1].value) {
+        Program.counter = (arguments[2] << 2) - 4;
+      }
+    }
+  },
 
-  // BGEZ
+  BGEZ: {
+    desc: "Branches if the value of the supplied register is greater than or equal to zero",
+    arguments: 2,
+    argument_format: "ri",
+    operation: function(arguments) {
+      if(arguments[0].value >= 0) {
+        Program.counter = (arguments[1] << 2) - 4;
+      }
+    }
+  },
 
-  // BGEZAL
+  BGEZAL: {
+    desc: "Branches if the value of the supplied register is greater than or equal to zero and stores return address",
+    arguments: 2,
+    argument_format: "ri",
+    operation: function(arguments) {
+      if(arguments[0].value >= 0) {
+        Registers.$ra.value = Program.counter;
 
-  // BGTZ
+        Program.counter = (arguments[1] << 2) - 4;
+      }
+    }
+  },
 
-  // BLEZ
+  BGTZ: {
+    desc: "Branches if the value of the supplied register is greater than zero",
+    arguments: 2,
+    argument_format: "ri",
+    operation: function(arguments) {
+      if(arguments[0].value > 0) {
+        Program.counter = (arguments[1] << 2) - 4;
+      }
+    }
+  },
 
-  // BLTZ
+  BLEZ: {
+    desc: "Branches if the value of the supplied register is less than or equal to zero",
+    arguments: 2,
+    argument_format: "ri",
+    operation: function(arguments) {
+      if(arguments[0].value <= 0) {
+        Program.counter = (arguments[1] << 2) - 4;
+      }
+    }
+  },
 
-  // BLTZAL
+  BLTZ: {
+    desc: "Branches if the value of the supplied register is less than zero",
+    arguments: 2,
+    argument_format: "ri",
+    operation: function(arguments) {
+      if(arguments[0].value < 0) {
+        Program.counter = (arguments[1] << 2) - 4;
+      }
+    }
+  },
 
-  // BNE
+  BLTZAL: {
+    desc: "Branches if the value of the supplied register is less than zero and stores the return address",
+    arguments: 2,
+    argument_format: "ri",
+    operation: function(arguments) {
+      if(arguments[0].value < 0) {
+        Registers.$ra.value = Program.counter;
+
+        Program.counter = (arguments[1] << 2) - 4;
+      }
+    }
+  },
+
+  BNE: {
+    desc: "Branch if the value of the supplied registers are not equal",
+    arguments: 3,
+    argument_format: "rri",
+    operation: function(arguments) {
+      if(arguments[0].value != arguments[1].value) {
+        Program.counter = (arguments[2] << 2) - 4;
+      }
+    }
+  },
 
   // DIV
 
   // DIVU
 
   J: {
-    desc: "Jumps to an address",
+    desc: "Jumps to an address indicated by a label",
     arguments: 1,
     argument_format: "l",
     operation: function(arguments) {
@@ -78,7 +154,18 @@ var Instructions = {
     }
   },
 
-  // JAL
+  JAL: {
+    desc: "Jumps to an address indicated by a label and stores return address",
+    arguments: 1,
+    argument_format: "l",
+    operation: function(arguments) {
+      // PC is auto-incremented previously
+      Registers.$ra.value = Program.counter;
+
+      // Set new PC **after** using PC to store return address
+      Program.counter = arguments[0] - 4;
+    }
+  },
 
   JR: {
     desc: "Jumps to an address stored in a register",
