@@ -15,12 +15,21 @@ var Program = {
   },
 
   execute: function() {
-    console.log(this.instructions);
-    var counter = 0x00400000;
-    while(this.instructions[counter] != undefined) {
-      Instructions[this.instructions[counter].instruction].operation(this.instructions[counter].arguments);
-      counter += 4;
-    }
+    this.counter = 0x00400000;
+
+    var execution_interval = setInterval(function() {
+      if(Program.instructions[Program.counter] != undefined) {
+        Instructions[Program.instructions[Program.counter].instruction].operation(Program.instructions[Program.counter].arguments);
+        Program.counter += 4;
+
+        // Update HTML indicated values of each register & PC
+        for(var i = 0; i < register_array.length; i++) {
+          document.getElementById(register_array[i]).innerHTML = Numbers.to_hex_string(Registers[register_array[i]].value);
+        }
+      } else {
+        clearInterval(execution_interval);
+      }
+    }, 500);
   },
 
   reinitialize: function() {
