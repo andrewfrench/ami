@@ -16,7 +16,7 @@ var Parser = {
       // then send to controller?
 
       // Add instruction to Program object
-      Program.add_instruction(instruction_list[i]);
+      // Program.add_instruction(instruction_list[i]);
 
       // Remove commented out portions of lines
       var comment_delimited_chunks = instruction_list[i].split("#");
@@ -60,7 +60,12 @@ var Parser = {
       // Convert arguments to registers
       var converted_arguments = this.convert_arguments(instruction_elements[0], instruction_arguments);
 
-      Instructions[instruction_elements[0]].operation(converted_arguments);
+      // Instructions[instruction_elements[0]].operation(converted_arguments);
+
+      Program.add_instruction({
+        instruction: instruction_elements[0],
+        arguments: converted_arguments
+      });
     }
   },
 
