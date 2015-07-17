@@ -52,10 +52,10 @@ var Instructions = {
   BEQ: {
     desc: "Branches if two registers are equal",
     arguments: 3,
-    argument_format: "rri",
+    argument_format: "rrl",
     operation: function(arguments) {
       if(arguments[0].value == arguments[1].value) {
-        Program.counter = (arguments[2] << 2) - 4;
+        Program.counter = arguments[2] - 4;
       }
     }
   },
@@ -63,10 +63,10 @@ var Instructions = {
   BGEZ: {
     desc: "Branches if the value of the supplied register is greater than or equal to zero",
     arguments: 2,
-    argument_format: "ri",
+    argument_format: "rl",
     operation: function(arguments) {
       if(arguments[0].value >= 0) {
-        Program.counter = (arguments[1] << 2) - 4;
+        Program.counter = arguments[1] - 4;
       }
     }
   },
@@ -74,12 +74,12 @@ var Instructions = {
   BGEZAL: {
     desc: "Branches if the value of the supplied register is greater than or equal to zero and stores return address",
     arguments: 2,
-    argument_format: "ri",
+    argument_format: "rl",
     operation: function(arguments) {
       if(arguments[0].value >= 0) {
         Registers.$ra.value = Program.counter;
 
-        Program.counter = (arguments[1] << 2) - 4;
+        Program.counter = arguments[1] - 4;
       }
     }
   },
@@ -87,10 +87,10 @@ var Instructions = {
   BGTZ: {
     desc: "Branches if the value of the supplied register is greater than zero",
     arguments: 2,
-    argument_format: "ri",
+    argument_format: "rl",
     operation: function(arguments) {
       if(arguments[0].value > 0) {
-        Program.counter = (arguments[1] << 2) - 4;
+        Program.counter = arguments[1] - 4;
       }
     }
   },
@@ -98,10 +98,10 @@ var Instructions = {
   BLEZ: {
     desc: "Branches if the value of the supplied register is less than or equal to zero",
     arguments: 2,
-    argument_format: "ri",
+    argument_format: "rl",
     operation: function(arguments) {
       if(arguments[0].value <= 0) {
-        Program.counter = (arguments[1] << 2) - 4;
+        Program.counter = arguments[1] - 4;
       }
     }
   },
@@ -109,10 +109,10 @@ var Instructions = {
   BLTZ: {
     desc: "Branches if the value of the supplied register is less than zero",
     arguments: 2,
-    argument_format: "ri",
+    argument_format: "rl",
     operation: function(arguments) {
       if(arguments[0].value < 0) {
-        Program.counter = (arguments[1] << 2) - 4;
+        Program.counter = arguments[1] - 4;
       }
     }
   },
@@ -120,12 +120,12 @@ var Instructions = {
   BLTZAL: {
     desc: "Branches if the value of the supplied register is less than zero and stores the return address",
     arguments: 2,
-    argument_format: "ri",
+    argument_format: "rl",
     operation: function(arguments) {
       if(arguments[0].value < 0) {
         Registers.$ra.value = Program.counter;
 
-        Program.counter = (arguments[1] << 2) - 4;
+        Program.counter = arguments[1] - 4;
       }
     }
   },
@@ -133,10 +133,10 @@ var Instructions = {
   BNE: {
     desc: "Branch if the value of the supplied registers are not equal",
     arguments: 3,
-    argument_format: "rri",
+    argument_format: "rrl",
     operation: function(arguments) {
       if(arguments[0].value != arguments[1].value) {
-        Program.counter = (arguments[2] << 2) - 4;
+        Program.counter = arguments[2] - 4;
       }
     }
   },
@@ -262,8 +262,6 @@ var Instructions = {
       }
     }
   },
-
-  // SLTI
 
   // SLTIU
 
