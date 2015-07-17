@@ -16,10 +16,10 @@ var Program = {
 
   execute: function() {
     console.log(this.instructions);
-    var address = 0x00400000;
-    while(this.instructions[address] != undefined) {
-      Instructions[this.instructions[address].instruction].operation(this.instructions[address].arguments);
-      address += 4;
+    var counter = 0x00400000;
+    while(this.instructions[counter] != undefined) {
+      Instructions[this.instructions[counter].instruction].operation(this.instructions[counter].arguments);
+      counter += 4;
     }
   },
 
