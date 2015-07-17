@@ -74,13 +74,20 @@ var Instructions = {
     arguments: 1,
     argument_format: "i",
     operation: function(arguments) {
-      Program.counter = arguments[0];
+      Program.counter = arguments[0] - 4;
     }
   },
 
   // JAL
 
-  // JR
+  JR: {
+    desc: "Jumps to an address stored in a register",
+    arguments: 1,
+    argument_format: "r",
+    operation: function(arguments) {
+      Program.counter = arguments[0].value - 4;
+    }
+  },
 
   // LB
 
@@ -220,6 +227,4 @@ var Instructions = {
       arguments[0].value = arguments[1].value ^ arguments[2];
     }
   }
-
-  // And more to come
 };
