@@ -6,12 +6,19 @@
 var Program = {
   counter: 0x00400000,
 
-  // Create object within to attach objects.
+  // Create object to contain instructions.
   instructions: {},
+
+  // Create object to contain labels.
+  labels: {},
 
   add_instruction: function(instruction) {
     this.instructions[this.counter] = instruction;
     this.counter += 4;
+  },
+
+  add_label: function(label) {
+    this.labels[label] = this.counter;
   },
 
   execute: function() {

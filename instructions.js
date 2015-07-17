@@ -72,7 +72,7 @@ var Instructions = {
   J: {
     desc: "Jumps to an address",
     arguments: 1,
-    argument_format: "i",
+    argument_format: "l",
     operation: function(arguments) {
       Program.counter = arguments[0] - 4;
     }

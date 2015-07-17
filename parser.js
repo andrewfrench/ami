@@ -8,21 +8,19 @@ var Parser = {
 
       // TODO: parse labels
 
-      // Change structure to scrub whitespace and comments from
-      // code first, then add each instruction and label to
-      // Program object and assign PC numbers. Then, each
-      // instruction is sent to Parser to be parsed and executed.
-      // Parse first, then add parsed instructions to Program array,
-      // then send to controller?
-
-      // Add instruction to Program object
-      // Program.add_instruction(instruction_list[i]);
-
       // Remove commented out portions of lines
       var comment_delimited_chunks = instruction_list[i].split("#");
 
       // Only keep portions to the left of any comment delimiters.
       instruction_list[i] = comment_delimited_chunks[0];
+
+      // Split labels from instructions that share a line
+      var label_chunks = instruction_list[i].split(":");
+
+      if(label_chunks.length > 1) {
+        Program.add_label(label_chunks[0]);
+        instruction_list[i] = label_chunks[1];
+      }
 
       // Pad commas with at least one confirmed space
       instruction_list[i] = instruction_list[i].replace(/,/g, ", ");
@@ -59,8 +57,6 @@ var Parser = {
 
       // Convert arguments to registers
       var converted_arguments = this.convert_arguments(instruction_elements[0], instruction_arguments);
-
-      // Instructions[instruction_elements[0]].operation(converted_arguments);
 
       Program.add_instruction({
         instruction: instruction_elements[0],
@@ -125,6 +121,7 @@ var Parser = {
 
         case "l":
           // Parse labels
+          converted_array.push(parseInt(Program.labels[arguments[i]]));
           break;
 
         default:
