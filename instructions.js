@@ -69,7 +69,14 @@ var Instructions = {
 
   // DIVU
 
-  // J
+  J: {
+    desc: "Jumps to an address",
+    arguments: 1,
+    argument_format: "i",
+    operation: function(arguments) {
+      Program.counter = arguments[0];
+    }
+  },
 
   // JAL
 
