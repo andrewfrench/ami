@@ -17,10 +17,11 @@ var Program = {
   execute: function() {
     this.counter = 0x00400000;
 
-    var execution_interval = setInterval(function() {
+    this.execution_interval = setInterval(function() {
       if(Program.instructions[Program.counter] != undefined) {
         Instructions[Program.instructions[Program.counter].instruction].operation(Program.instructions[Program.counter].arguments);
         Program.counter += 4;
+        Registers.PC.value = Program.counter;
 
         // Update HTML indicated values of each register & PC
         for(var i = 0; i < register_array.length; i++) {
@@ -29,7 +30,7 @@ var Program = {
       } else {
         clearInterval(execution_interval);
       }
-    }, 500);
+    }, 100);
   },
 
   reinitialize: function() {

@@ -1,8 +1,7 @@
 // main.js
 
-// Parser.parse(Test.command_list);
-
 document.getElementById("evaluate").onclick = function() {
+  clearInterval(Program.execution_interval);
   Registers.reinitialize();
   Program.reinitialize();
 
@@ -10,6 +9,8 @@ document.getElementById("evaluate").onclick = function() {
   Parser.parse(code_lines);
 
   Program.execute();
+}
 
-
+document.getElementById("stop").onclick = function() {
+  clearInterval(Program.execution_interval);
 }
