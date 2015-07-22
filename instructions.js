@@ -4,10 +4,11 @@
 
 TODO:
 - Create error checks for instructions that populate HTML error element
+- Add instructions that deal with memory locations
 
 */
 
-var valid_instruction_list = ["ADD", "ADDI", "ADDIU", "AND", "ANDI", "BEQ", "BGEZ", "BGEZAL", "BGTZ", "BLEZ", "BLTZ", "BLTZAL", "BNE", "DIV", "DIVU", "J", "JAL", "JR", "LB", "LUI", "LW", "MFHI", "MFLO", "MULT", "MULTU", "NOOP", "OR", "ORI", "SB", "SLL", "SLLV", "SLT", "SLTI", "SLTIU", "SLTU", "SRA", "SRL", "SRLV", "SUB", "SUBU", "SW", "SYSCALL", "XOR", "XORI"];
+var valid_instruction_list = ["ADD", "ADDI", "ADDIU", "AND", "ANDI", "BEQ", "BGEZ", "BGEZAL", "BGTZ", "BLEZ", "BLTZ", "BLTZAL", "BNE", "DIV", "DIVU", "J", "JAL", "JR", "LB", "LI", "LUI", "LW", "MFHI", "MFLO", "MOVE", "MULT", "MULTU", "NOOP", "OR", "ORI", "SB", "SLL", "SLLV", "SLT", "SLTI", "SLTIU", "SLTU", "SRA", "SRL", "SRLV", "SUB", "SUBU", "SW", "SYSCALL", "XOR", "XORI"];
 
 var Instructions = {
   ADD: {
@@ -165,7 +166,7 @@ var Instructions = {
       Registers.LO.value = Math.floor(arguments[0].value / arguments[1].value);
       Registers.HI.value = arguments[0].value % arguments[1].value;
     }
-  }
+  },
 
   J: {
     desc: "Jumps to an address indicated by a label",
@@ -200,6 +201,15 @@ var Instructions = {
 
   // LB
 
+  LI: {
+    desc: "Load the immediate value into the specified register",
+    arguments: 2,
+    argument_format: "ri",
+    operation: function(arguments) {
+      arguments[0].value = 0xffffffff & arguments[1];
+    }
+  },
+
   // LUI
 
   // LW
@@ -219,6 +229,15 @@ var Instructions = {
     argument_format: "r",
     operation: function(arguments) {
       arguments[0].value = Registers.LO.value;
+    }
+  },
+
+  MOVE: {
+    desc: "Moves the value of one register to another register",
+    arguments: 2,
+    argument_format: "rr",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1].value;
     }
   },
 
