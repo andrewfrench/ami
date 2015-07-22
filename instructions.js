@@ -9,7 +9,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value + arguments[2].value;
+      arguments[0].value = 0xffffffff & (arguments[1].value + arguments[2].value);
     }
   },
 
@@ -18,7 +18,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value + arguments[2];
+      arguments[0].value = 0xffffffff & (arguments[1].value + arguments[2]);
     }
   },
 
@@ -224,7 +224,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value << arguments[2];
+      arguments[0].value = 0xffffffff & (arguments[1].value << arguments[2]);
     }
   },
 
@@ -233,7 +233,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value << arguments[2].value;
+      arguments[0].value = 0xffffffff & (arguments[1].value << arguments[2].value);
     }
   },
 
@@ -285,7 +285,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value - arguments[2].value;
+      arguments[0].value = 0xffffffff & (arguments[1].value - arguments[2].value);
     }
   },
 
