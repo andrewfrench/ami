@@ -4,7 +4,13 @@
 
 TODO:
 - Parse registers numerically with help of argument_format and register name array
-- High-level parsing of memory elements
+- High-level parsing of memory elements (Data storage starts at 0x10010000)
+- Add warnings for recommended program elements
+  - Not including main: at beginning of program
+  - Not correctly exiting program
+  - Etc.
+- .global?
+- Tabs allowing separation of subroutines (oy)
 
 */
 
