@@ -3,7 +3,7 @@
 /*
 
 TODO:
-- Deal with signed and unsigned numbers
+- Allow users to choose between HEX, BIN, DEC value representation
 
 */
 

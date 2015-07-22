@@ -154,7 +154,7 @@ var Instructions = {
     argument_format: "rr",
     operation: function(arguments) {
       Registers.LO.value = Math.floor(arguments[0].value / arguments[1].value);
-      Registers.HI.value = arguments[0].value % arguments[1].value;
+      Registers.HI.value = ((arguments[0].value % arguments[1].value) + arguments[1].value) % arguments[1].value;
     }
   },
 

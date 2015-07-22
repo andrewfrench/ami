@@ -8,6 +8,7 @@ TODO:
 - Add warnings for recommended program elements
   - Not including main: at beginning of program
   - Not correctly exiting program
+  - Immediate values larger than 16 bits
   - Etc.
 - .global?
 - Tabs allowing separation of subroutines (oy)
