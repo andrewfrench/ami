@@ -29,7 +29,7 @@ var Instructions = {
   },
 
   ADDIU: {
-    desc: "Add immediate unsigned value (no overflow)",
+    desc: "Add immediate unsigned value, overflow is ignored",
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
@@ -38,7 +38,7 @@ var Instructions = {
   },
 
   ADDU: {
-    desc: "Add unsigned (no overflow)",
+    desc: "Add unsigned, overflow is ignored",
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
@@ -147,9 +147,25 @@ var Instructions = {
     }
   },
 
-  // DIV
+  DIV: {
+    desc: "Divides the first register by the second, storing the quotient in LO and the remainder in HI",
+    arguments: 2,
+    argument_format: "rr",
+    operation: function(arguments) {
+      Registers.LO.value = Math.floor(arguments[0].value / arguments[1].value);
+      Registers.HI.value = arguments[0].value % arguments[1].value;
+    }
+  },
 
-  // DIVU
+  DIVU: {
+    desc: "Divides the first register by the second, storing the quotient in LO and the remainder in HI, overflow is ignored",
+    arguments: 2,
+    argument_format: "rr",
+    operation: function(arguments) {
+      Registers.LO.value = Math.floor(arguments[0].value / arguments[1].value);
+      Registers.HI.value = arguments[0].value % arguments[1].value;
+    }
+  }
 
   J: {
     desc: "Jumps to an address indicated by a label",
@@ -188,13 +204,41 @@ var Instructions = {
 
   // LW
 
-  // MFHI
+  MFHI: {
+    desc: "Moves the value of HI to the specified register",
+    arguments: 1,
+    argument_format: "r",
+    operation: function(arguments) {
+      arguments[0].value = Registers.HI.value;
+    }
+  },
 
-  // MFLO
+  MFLO: {
+    desc: "Moves the value of LO to the specified register",
+    arguments: 1,
+    argument_format: "r",
+    operation: function(arguments) {
+      arguments[0].value = Registers.LO.value;
+    }
+  },
 
-  // MULT
+  MULT: {
+    desc: "Multiplies the value of two registers",
+    arguments: 2,
+    argument_format: "rr",
+    operation: function(arguments) {
+      Registers.LO.value = 0xffffffff & (arguments[0].value * arguments[1].value);
+    }
+  },
 
-  // MULTU
+  MULTU: {
+    desc: "Multiplies the value of two registers, overflow is ignored",
+    arguments: 2,
+    argument_format: "rr",
+    operation: function(arguments) {
+      Registers.LO.value = 0xffffffff & (arguments[0].value * arguments[1].value);
+    }
+  },
 
   NOOP: {
     desc: "No operation",
@@ -287,7 +331,7 @@ var Instructions = {
   // SRLV
 
   SUB: {
-    desc: "Subtract",
+    desc: "Subtracts the value of two registers",
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
@@ -295,7 +339,14 @@ var Instructions = {
     }
   },
 
-  // SUBU
+  SUBU: {
+    desc: "Subtracts the value of two registers, ignoring overflow",
+    arguments: 3,
+    argument_format: "rrr",
+    operation: function(arguments) {
+      arguments[0].value = 0xffffffff & (arguments[1].value - arguments[2].value);
+    }
+  },
 
   // SW
 
