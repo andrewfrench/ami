@@ -34,7 +34,7 @@ var Program = {
 
         // Update HTML indicated values of each register & PC
         for(var i = 0; i < register_array.length; i++) {
-          document.getElementById(register_array[i]).innerHTML = Numbers.to_hex_string(Registers[register_array[i]].value);
+          document.getElementById(register_array[i]).innerHTML = Numbers.to_hex_string(Registers[register_array[i]].value) + " (" + Registers[register_array[i]].value + ")";
         }
       } else {
         clearInterval(this.execution_interval);
