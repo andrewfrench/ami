@@ -1,6 +1,11 @@
 // registers.js
 
-// Registers are 32 bits wide (0x0000)
+/*
+
+TODO:
+- Add the other registers ($HI, $LO, etc.)
+
+*/
 
 var register_array = [
   "$zero",

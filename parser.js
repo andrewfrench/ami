@@ -1,15 +1,19 @@
 // parser.js
 
+/*
+
+TODO:
+- Parse registers numerically with help of argument_format and register name array
+- High-level parsing of memory elements
+
+*/
+
 var Parser = {
   parse: function(instruction_list) {
 
     // Inspect each argument in order
     for(var i = 0; i < instruction_list.length; i++) {
 
-      // TODO:
-      // - AND 32 LSBs with arithmetic operations to preserve overflow
-      // - Parse registers numerically with help of argument_format and register name array
-      
       // Remove commented out portions of lines
       var comment_delimited_chunks = instruction_list[i].split("#");
 

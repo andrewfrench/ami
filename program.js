@@ -1,7 +1,11 @@
 // program.js
 
-// Contains the program object, relating the program counter
-// to instructions as parsed by the Parser.
+/*
+
+TODO:
+- Add structure for memory elements
+
+*/
 
 var Program = {
   counter: 0x00400000,
