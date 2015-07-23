@@ -3,8 +3,8 @@
 /*
 
 TODO:
+- Limit the value of data elements by type
 - Parse registers numerically with help of argument_format and register name array
-- High-level parsing of memory elements (Data storage starts at 0x10010000)
 - Add warnings for recommended program elements
   - Not including main: at beginning of program
   - Not correctly exiting program
@@ -33,8 +33,6 @@ var Parser = {
       text_element = program_text.split(".data")[0].replace(".text", "");
       data_element = program_text.split(".data")[1];
     }
-
-    console.log(data_element, text_element);
 
     this.parse_data_element(data_element.split("\n"));
     this.parse_text_element(text_element.split("\n"));
@@ -143,8 +141,6 @@ var Parser = {
         data = data_element.split(".word")[1].trim().split(",");
       }
 
-      console.log(label, type, data);
-
       switch(type) {
         case "ascii":
           break;
@@ -166,9 +162,6 @@ var Parser = {
           Memory.labels[label] = Memory.location;
           Memory.word.add(data);
           break;
-
-        default:
-          console.log("oh no");
       }
     }
   },
