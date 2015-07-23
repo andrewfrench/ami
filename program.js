@@ -50,4 +50,4 @@ var Program = {
     this.counter = 0x00400000;
     this.instructions = {};
   }
-}
+};

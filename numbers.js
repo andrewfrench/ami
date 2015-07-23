@@ -21,4 +21,4 @@ var Numbers = {
     var bin_value = (dec_value >>> 0).toString(2);
     return "0b" + Array(33 - bin_value.length).join("0") + bin_value;
   }
-}
+};

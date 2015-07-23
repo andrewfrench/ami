@@ -1,0 +1,5 @@
+// memory.js
+
+var Memory = {
+
+};

@@ -212,7 +212,14 @@ var Instructions = {
     }
   },
 
-  // LUI
+  LUI: {
+    desc: "Load the immediate value into the first two bytes of the register",
+    arguments: 2,
+    argument_format: "ri",
+    operation: function(arguments) {
+      arguments[0].value = 0xffffffff & (arguments[1] << 16);
+    }
+  },
 
   // LW
 
