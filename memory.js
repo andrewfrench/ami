@@ -89,15 +89,29 @@ var Memory = {
   },
 
   get_byte: function(address) {
-    return Memory.data[address];
+    if(Memory.data[address] == undefined) {
+      return 0;
+    } else {
+      return Memory.data[address];
+    }
   },
 
   get_halfword: function(address) {
-    return (Memory.data[address] << 8) + Memory.data[address + 1];
+    var result = 0;
+    for(var i = 0; i < 2; i++) {
+      result = result << 8;
+      result += Memory.get_byte(address + i);
+    }
+    return result;
   },
 
   get_word: function(address) {
-    return (Memory.data[address] << 24) + (Memory.data[address + 1] << 16) + (Memory.data[address + 2] << 8) + Memory.data[address + 3];
+    var result = 0;
+    for(var i = 0; i < 4; i++) {
+      result = result << 8;
+      result += Memory.get_byte(address + i);
+    }
+    return result;
   },
 
   store_byte: function(value, address) {

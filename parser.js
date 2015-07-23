@@ -230,6 +230,12 @@ var Parser = {
           converted_array.push(parseInt(Program.labels[arguments[i]]));
           break;
 
+        case "m":
+          var arg_chunks = arguments[i].split("(");
+          converted_array.push(parseInt(arg_chunks[0]));
+          converted_array.push(Registers[arg_chunks[1].replace(")","")]);
+          break;
+
         default:
           console.log("Error: malformed argument format string.");
       }
