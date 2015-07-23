@@ -129,7 +129,11 @@ var Parser = {
 
         case "i":
           // Add the immediate value to the array without alteration
-          converted_array.push(parseInt(arguments[i]));
+          if(parseInt(arguments[i]) > 0xffff) {
+            console.log("Error: immediate value greater than 0x0000ffff.");
+          } else {
+            converted_array.push(parseInt(arguments[i]));
+          }
           break;
 
         case "l":
