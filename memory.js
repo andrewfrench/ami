@@ -11,6 +11,8 @@ var Memory = {
 
   data: {},
 
+  labels: {},
+
   ascii: {
     bytes: 1,
     add: function(ascii_values) {
@@ -38,7 +40,7 @@ var Memory = {
     bytes: 1,
     add: function(byte_values) {
       for(var i = 0; i < byte_values.length; i++) {
-        Memory.data[Memory.location] = byte_values[i];
+        Memory.data[Memory.location] = parseInt(byte_values[i]);
         Memory.location++;
       }
     }
@@ -48,10 +50,10 @@ var Memory = {
     bytes: 2,
     add: function(halfword_values) {
       for(var i = 0; i < halfword_values.length; i++) {
-        Memory.data[Memory.location] = (0xff00 & halfword_values[i]) >> 8;
+        Memory.data[Memory.location] = (0xff00 & parseInt(halfword_values[i])) >> 8;
         Memory.location++;
 
-        Memory.data[Memory.location] = 0x00ff & halfword_values[i];
+        Memory.data[Memory.location] = 0x00ff & parseInt(halfword_values[i]);
         Memory.location++;
       }
     }
@@ -61,16 +63,16 @@ var Memory = {
     bytes: 4,
     add: function(word_values) {
       for(var i = 0; i < word_values.length; i++) {
-        Memory.data[Memory.location] = (0xff000000 & word_values[i]) >> 24;
+        Memory.data[Memory.location] = (0xff000000 & parseInt(word_values[i])) >> 24;
         Memory.location++;
 
-        Memory.data[Memory.location] = (0x00ff0000 & word_values[i]) >> 16;
+        Memory.data[Memory.location] = (0x00ff0000 & parseInt(word_values[i])) >> 16;
         Memory.location++;
 
-        Memory.data[Memory.location] = (0x0000ff00 & word_values[i]) >> 8;
+        Memory.data[Memory.location] = (0x0000ff00 & parseInt(word_values[i])) >> 8;
         Memory.location++;
 
-        Memory.data[Memory.location] = 0x000000ff & word_values[i];
+        Memory.data[Memory.location] = 0x000000ff & parseInt(word_values[i]);
         Memory.location++;
       }
     }
@@ -84,5 +86,11 @@ var Memory = {
         Memory.location++;
       }
     }
+  },
+
+  reinitialize: function() {
+    Memory.data = {};
+    Memory.labels = {};
+    Memory.location = 0x10010000;
   }
 };

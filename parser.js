@@ -24,15 +24,17 @@ var Parser = {
       // Data is defined before program
 
       var regex = /.*\.data\s+(.*)\s+\.text.*/;
-      data_element = program_text.match(regex)[1];
+      data_element = program_text.split(".text")[0].replace(".data", "");
       text_element = program_text.split(".text")[1];
     } else {
       // Program is defined before data
 
       var regex = /.*\.text\s+(.*)\s+\.data.*/;
-      text_element = program_text.match(regex)[1];
+      text_element = program_text.split(".data")[0].replace(".text", "");
       data_element = program_text.split(".data")[1];
     }
+
+    console.log(data_element, text_element);
 
     this.parse_data_element(data_element.split("\n"));
     this.parse_text_element(text_element.split("\n"));
@@ -100,7 +102,75 @@ var Parser = {
   },
 
   parse_data_element(data_list) {
+    for(var i = 0; i < data_list.length; i++) {
+      // Check for a data type declaration
+      var data_element = data_list[i];
 
+      // Ignore empty lines
+      if(!/\S/.test(data_element)) {
+        continue;
+      }
+
+      var type, label, data;
+
+      if(data_element.indexOf(".ascii") >= 0) {
+        type = "ascii";
+        label = data_element.split(".ascii")[0].trim().replace(":", "");
+        data = data_element.split(".ascii")[1].trim();
+      }
+
+      if(data_element.indexOf(".asciiz") >= 0) {
+        type = "asciiz";
+        label = data_element.split(".asciiz")[0].trim().replace(":", "");
+        data = data_element.split(".asciiz")[1].trim();
+      }
+
+      if(data_element.indexOf(".byte") >= 0) {
+        type = "byte";
+        label = data_element.split(".byte")[0].trim().replace(":", "");
+        data = data_element.split(".byte")[1].trim().split(",");
+      }
+
+      if(data_element.indexOf(".halfword") >= 0) {
+        type = "halfword";
+        label = data_element.split(".halfword")[0].trim().replace(":", "");
+        data = data_element.split(".halfword")[1].trim().split(",");
+      }
+
+      if(data_element.indexOf(".word") >= 0) {
+        type = "word";
+        label = data_element.split(".word")[0].trim().replace(":", "");
+        data = data_element.split(".word")[1].trim().split(",");
+      }
+
+      console.log(label, type, data);
+
+      switch(type) {
+        case "ascii":
+          break;
+
+        case "asciiz":
+          break;
+
+        case "byte":
+          Memory.labels[label] = Memory.location;
+          Memory.byte.add(data);
+          break;
+
+        case "halfword":
+          Memory.labels[label] = Memory.location;
+          Memory.halfword.add(data);
+          break;
+
+        case "word":
+          Memory.labels[label] = Memory.location;
+          Memory.word.add(data);
+          break;
+
+        default:
+          console.log("oh no");
+      }
+    }
   },
 
   strip_commas_from_instruction: function(instruction_elements) {
