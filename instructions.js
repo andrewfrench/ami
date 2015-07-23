@@ -3,7 +3,7 @@
 /*
 
 TODO:
-- Create error checks for instructions that populate HTML error element
+- Create error checks for each instruction, to populate HTML error element
 - Add instructions that deal with memory locations
 
 */
@@ -154,6 +154,8 @@ var Instructions = {
     argument_format: "rr",
     operation: function(arguments) {
       Registers.LO.value = Math.floor(arguments[0].value / arguments[1].value);
+
+      // Truly a beautiful language
       Registers.HI.value = ((arguments[0].value % arguments[1].value) + arguments[1].value) % arguments[1].value;
     }
   },
