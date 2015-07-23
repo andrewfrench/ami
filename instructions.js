@@ -201,7 +201,15 @@ var Instructions = {
     }
   },
 
-  // LB
+  LB: {
+    desc: "Loads a byte into the specified register from the specified address",
+    arguments: 2,
+    argument_format: "rm",
+    operation: function(arguments) {
+      // arg[1] is offset, arg[2] is register
+      arguments[0].value = Memory.get_byte(arguments[1] + arguments[2].value);
+    }
+  },
 
   LI: {
     desc: "Load the immediate value into the specified register",
@@ -221,7 +229,14 @@ var Instructions = {
     }
   },
 
-  // LW
+  LW: {
+    desc: "Loads a word into the specified register from the specified address",
+    arguments: 2,
+    argument_format: "rm",
+    operation: function(arguments) {
+      arguments[0].value = Memory.get_word(arguments[1] + arguments[2].value);
+    }
+  },
 
   MFHI: {
     desc: "Moves the value of HI to the specified register",
@@ -295,7 +310,15 @@ var Instructions = {
     }
   },
 
-  // SB
+  SB: {
+    desc: "Stores the least significant byte of the supplied register into the supplied memory address",
+    arguments: 2,
+    argument_format: "rm",
+    operation: function(arguments) {
+      // Store value at offset + address
+      Memory.store_byte(arguments[0].value, arguments[1] + arguments[2].value);
+    }
+  },
 
   SLL: {
     desc: "Logical shift left",
@@ -376,7 +399,15 @@ var Instructions = {
     }
   },
 
-  // SW
+  SW: {
+    desc: "Stores the value of the specified register to the specifed memory address",
+    arguments: 2,
+    argument_format: "rm",
+    operation: function(arguments) {
+      // offset, register
+      Memory.store_word(arguments[0].value, arguments[1] + arguments[2].value);
+    }
+  },
 
   // SYSCALL
 
