@@ -9,6 +9,8 @@ TODO:
 var Memory = {
   location: 0x10010000,
 
+  data: {},
+
   ascii: {
     bytes: 1,
     add: function(ascii_values) {
@@ -82,7 +84,5 @@ var Memory = {
         Memory.location++;
       }
     }
-  },
-
-  data: {}
+  }
 };
