@@ -16,8 +16,29 @@ TODO:
 */
 
 var Parser = {
-  parse: function(instruction_list) {
+  parse: function(program_text) {
+    var data_element, text_element;
 
+    // Split the data elements from the text elements
+    if(program_text.indexOf(".data") < program_text.indexOf(".text")) {
+      // Data is defined before program
+
+      var regex = /.*\.data\s+(.*)\s+\.text.*/;
+      data_element = program_text.match(regex)[1];
+      text_element = program_text.split(".text")[1];
+    } else {
+      // Program is defined before data
+
+      var regex = /.*\.text\s+(.*)\s+\.data.*/;
+      text_element = program_text.match(regex)[1];
+      data_element = program_text.split(".data")[1];
+    }
+
+    this.parse_data_element(data_element.split("\n"));
+    this.parse_text_element(text_element.split("\n"));
+  },
+
+  parse_text_element(instruction_list) {
     // Inspect each argument in order
     for(var i = 0; i < instruction_list.length; i++) {
 
@@ -76,6 +97,10 @@ var Parser = {
         arguments: converted_arguments
       });
     }
+  },
+
+  parse_data_element(data_list) {
+
   },
 
   strip_commas_from_instruction: function(instruction_elements) {

@@ -13,8 +13,8 @@ document.getElementById("evaluate").onclick = function() {
   Registers.reinitialize();
   Program.reinitialize();
 
-  var code_lines = document.getElementById("main").value.split("\n");
-  Parser.parse(code_lines);
+  // var code_lines = document.getElementById("main").value.split("\n");
+  Parser.parse(document.getElementById("main").value);
 
   Program.execute();
 }
