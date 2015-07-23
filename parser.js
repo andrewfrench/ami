@@ -102,7 +102,8 @@ var Parser = {
   parse_data_element(data_list) {
     for(var i = 0; i < data_list.length; i++) {
       // Check for a data type declaration
-      var data_element = data_list[i];
+      // Only keep what's to the left of a comment delimiter
+      var data_element = data_list[i].split("#")[0];
 
       // Ignore empty lines
       if(!/\S/.test(data_element)) {
