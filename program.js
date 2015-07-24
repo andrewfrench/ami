@@ -38,6 +38,19 @@ var Program = {
         for(var i = 0; i < register_array.length; i++) {
           document.getElementById(register_array[i]).innerHTML = Numbers.to_hex_string(Registers[register_array[i]].value) + " (" + Registers[register_array[i]].value + ")";
         }
+
+        // Update HTML indicated values of memory elements
+        var num_html_lines = document.getElementsByClassName("data").length;
+        var address = 0x10010000;
+        for(var i = 0; i < num_html_lines; i++) {
+          var html_element = document.getElementsByClassName("data")[i];
+          var inner_html = "";
+          for(var j = 0; j < 12; j++) {
+            inner_html += Memory.get_byte(address).toString(16) + " ";
+            address++;
+          }
+          html_element.innerHTML = inner_html;
+        }
       } else {
         clearInterval(this.execution_interval);
       }

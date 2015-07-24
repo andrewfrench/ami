@@ -18,12 +18,12 @@ TODO:
   <div>Using MIPS implementation information from <a href="http://www.mrc.uidaho.edu/mrc/people/jff/digital/MIPSir.html" target="_blank">http://www.mrc.uidaho.edu/mrc/people/jff/digital/MIPSir.html</a></div>
   <div>and information from <a href="http://logos.cs.uic.edu/366/notes/mips%20quick%20tutorial.htm" target="_blank">http://logos.cs.uic.edu/366/notes/mips%20quick%20tutorial.htm</a></div>
   <div>with additional information from <a href="https://www.utdallas.edu/~dodge/EE2310/lec13.pdf" target="_blank">https://www.utdallas.edu/~dodge/EE2310/lec13.pdf</a></div>
-  <div id="left">
+  <div id="input">
     <textarea id="main" spellcheck="false"></textarea>
     <button id="evaluate">Evaluate</button>
     <button id="stop">Stop</button>
   </div>
-  <div id="right">
+  <div id="registers">
     <div><div class="register">PC: </div> <div class="value" id="PC">0x00400000 (4194304)</div></div>
     <div><div class="register">HI: </div> <div class="value" id="HI">0x00000000 (0)</div></div>
     <div><div class="register">LO: </div> <div class="value" id="LO">0x00000000 (0)</div></div>
@@ -59,7 +59,24 @@ TODO:
     <div><div class="register">$sp: </div> <div class="value" id="$sp">0x7fffffff (2147483647)</div></div>
     <div><div class="register">$fp: </div> <div class="value" id="$fp">0x00000000 (0)</div></div>
     <div><div class="register">$ra: </div> <div class="value" id="$ra">0x00000000 (0)</div></div>
-
+  </div>
+  <div id="memory">
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
+    <div class="element"><div class="data">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></div>
   </div>
   <script src="memory.js"></script>
   <script src="registers.js"></script>

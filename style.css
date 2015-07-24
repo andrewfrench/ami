@@ -3,14 +3,26 @@ html, body {
   font-size: 16px;
 }
 
-div#left {
+div#input {
   float: left;
   width: 300px;
 }
 
-div#right {
+div#registers {
   float: left;
   padding-left: 10px;
+  width: 276px;
+}
+
+div#memory {
+  float: left;
+  padding-left: 10px;
+  font-family: "Droid Sans Mono", monospace;
+}
+
+div.data {
+  display: inline-block;
+  padding-left: 10px
 }
 
 textarea#main {
