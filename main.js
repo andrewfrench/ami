@@ -10,6 +10,7 @@ TODO:
 
 document.getElementById("evaluate").onclick = function() {
   clearInterval(Program.execution_interval);
+  console.clear();
   Registers.reinitialize();
   Program.reinitialize();
   Memory.reinitialize();

@@ -30,8 +30,6 @@ var Program = {
 
     this.execution_interval = setInterval(function() {
       if(Program.instructions[Program.counter] != undefined) {
-        console.log(Program.instructions[Program.counter].instruction);
-
         Instructions[Program.instructions[Program.counter].instruction].operation(Program.instructions[Program.counter].arguments);
         Program.counter += 4;
         Registers.PC.value = Program.counter;
@@ -43,7 +41,7 @@ var Program = {
       } else {
         clearInterval(this.execution_interval);
       }
-    }, 100);
+    }, 80);
   },
 
   reinitialize: function() {

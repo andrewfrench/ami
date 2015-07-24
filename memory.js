@@ -124,10 +124,13 @@ var Memory = {
   },
 
   store_word: function(value, address) {
-    Memory.data[address] = 0xff000000 & value;
-    Memory.data[address + 1] = 0x00ff0000 & value;
-    Memory.data[address + 2] = 0x0000ff00 & value;
+    Memory.data[address]     = (0xff000000 & value) >> 24;
+    Memory.data[address + 1] = (0x00ff0000 & value) >> 16;
+    Memory.data[address + 2] = (0x0000ff00 & value) >> 8;
     Memory.data[address + 3] = 0x000000ff & value;
+    console.clear();
+    console.log(value);
+    console.log(Memory.data[address], Memory.data[address + 1], Memory.data[address + 2], Memory.data[address + 3]);
   },
 
   reinitialize: function() {
