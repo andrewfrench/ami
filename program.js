@@ -45,8 +45,9 @@ var Program = {
         for(var i = 0; i < num_html_lines; i++) {
           var html_element = document.getElementsByClassName("data")[i];
           var inner_html = "";
-          for(var j = 0; j < 12; j++) {
-            inner_html += Memory.get_byte(address).toString(16) + " ";
+          for(var j = 0; j < 16; j++) {
+            var hex_string = Memory.get_byte(address).toString(16);
+            inner_html += Array(3 - hex_string.length).join("0") + hex_string + " ";
             address++;
           }
           html_element.innerHTML = inner_html;

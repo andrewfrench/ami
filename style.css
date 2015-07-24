@@ -22,7 +22,8 @@ div#memory {
 
 div.data {
   display: inline-block;
-  padding-left: 10px
+  padding-left: 10px;
+  padding-bottom: 2px;
 }
 
 textarea#main {
