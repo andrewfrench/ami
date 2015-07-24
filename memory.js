@@ -50,7 +50,7 @@ var Memory = {
     bytes: 2,
     add: function(halfword_values) {
       for(var i = 0; i < halfword_values.length; i++) {
-        Memory.data[Memory.address] = (0xff00 & parseInt(halfword_values[i])) >> 8;
+        Memory.data[Memory.address] = (0xff00 & parseInt(halfword_values[i])) >>> 8;
         Memory.address++;
 
         Memory.data[Memory.address] = 0x00ff & parseInt(halfword_values[i]);
@@ -63,13 +63,13 @@ var Memory = {
     bytes: 4,
     add: function(word_values) {
       for(var i = 0; i < word_values.length; i++) {
-        Memory.data[Memory.address] = (0xff000000 & parseInt(word_values[i])) >> 24;
+        Memory.data[Memory.address] = (0xff000000 & parseInt(word_values[i])) >>> 24;
         Memory.address++;
 
-        Memory.data[Memory.address] = (0x00ff0000 & parseInt(word_values[i])) >> 16;
+        Memory.data[Memory.address] = (0x00ff0000 & parseInt(word_values[i])) >>> 16;
         Memory.address++;
 
-        Memory.data[Memory.address] = (0x0000ff00 & parseInt(word_values[i])) >> 8;
+        Memory.data[Memory.address] = (0x0000ff00 & parseInt(word_values[i])) >>> 8;
         Memory.address++;
 
         Memory.data[Memory.address] = 0x000000ff & parseInt(word_values[i]);
@@ -124,9 +124,9 @@ var Memory = {
   },
 
   store_word: function(value, address) {
-    Memory.data[address]     = (0xff000000 & value) >> 24;
-    Memory.data[address + 1] = (0x00ff0000 & value) >> 16;
-    Memory.data[address + 2] = (0x0000ff00 & value) >> 8;
+    Memory.data[address]     = (0xff000000 & value) >>> 24;
+    Memory.data[address + 1] = (0x00ff0000 & value) >>> 16;
+    Memory.data[address + 2] = (0x0000ff00 & value) >>> 8;
     Memory.data[address + 3] = 0x000000ff & value;
     console.clear();
     console.log(value);
