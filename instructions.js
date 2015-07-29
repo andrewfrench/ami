@@ -10,7 +10,7 @@ TODO:
 
 */
 
-var valid_instruction_list = ["ADD", "ADDI", "ADDIU", "AND", "ANDI", "BEQ", "BGEZ", "BGEZAL", "BGTZ", "BLEZ", "BLTZ", "BLTZAL", "BNE", "DIV", "DIVU", "J", "JAL", "JR", "LB", "LI", "LUI", "LW", "MFHI", "MFLO", "MOVE", "MULT", "MULTU", "NOOP", "OR", "ORI", "SB", "SLL", "SLLV", "SLT", "SLTI", "SLTIU", "SLTU", "SRA", "SRL", "SRLV", "SUB", "SUBU", "SW", "SYSCALL", "XOR", "XORI"];
+var valid_instruction_list = ["ADD", "ADDI", "ADDIU", "AND", "ANDI", "BEQ", "BGEZ", "BGEZAL", "BGTZ", "BLEZ", "BLTZ", "BLTZAL", "BNE", "DIV", "DIVU", "J", "JAL", "JR", "LA", "LB", "LI", "LUI", "LW", "MFHI", "MFLO", "MOVE", "MULT", "MULTU", "NOOP", "OR", "ORI", "SB", "SLL", "SLLV", "SLT", "SLTI", "SLTIU", "SLTU", "SRA", "SRL", "SRLV", "SUB", "SUBU", "SW", "SYSCALL", "XOR", "XORI"];
 
 var Instructions = {
   ADD: {
@@ -200,6 +200,15 @@ var Instructions = {
     argument_format: "r",
     operation: function(arguments) {
       Program.counter = arguments[0].value - 4;
+    }
+  },
+
+  LA: {
+    desc: "Loads the data address referred to by a label",
+    arguments: 2,
+    argument_format: "rk",
+    operation: function(arguments) {
+      arguments[0].value = arguments[1];
     }
   },
 

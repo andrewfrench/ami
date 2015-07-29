@@ -117,12 +117,10 @@ var Parser = {
         type = "asciiz";
         label = data_element.split(".asciiz")[0].trim().replace(":", "");
         data = data_element.split(".asciiz")[1].trim();
-        console.log(label, data);
       }else if(data_element.indexOf(".ascii") >= 0) {
         type = "ascii";
         label = data_element.split(".ascii")[0].trim().replace(":", "");
         data = data_element.split(".ascii")[1].trim();
-        console.log(label, data);
       }else if(data_element.indexOf(".byte") >= 0) {
         type = "byte";
         label = data_element.split(".byte")[0].trim().replace(":", "");
@@ -139,27 +137,27 @@ var Parser = {
 
       switch(type) {
         case "ascii":
-          Memory.labels[label] = Memory.location;
+          Memory.labels[label] = Memory.address;
           Memory.ascii.add(data);
           break;
 
         case "asciiz":
-          Memory.labels[label] = Memory.location;
+          Memory.labels[label] = Memory.address;
           Memory.asciiz.add(data);
           break;
 
         case "byte":
-          Memory.labels[label] = Memory.location;
+          Memory.labels[label] = Memory.address;
           Memory.byte.add(data);
           break;
 
         case "halfword":
-          Memory.labels[label] = Memory.location;
+          Memory.labels[label] = Memory.address;
           Memory.halfword.add(data);
           break;
 
         case "word":
-          Memory.labels[label] = Memory.location;
+          Memory.labels[label] = Memory.address;
           Memory.word.add(data);
           break;
       }
@@ -225,8 +223,13 @@ var Parser = {
           break;
 
         case "l":
-          // Parse labels
+          // Parse program labels
           converted_array.push(parseInt(Program.labels[arguments[i]]));
+          break;
+
+        case "k":
+          // Parse data labels
+          converted_array.push(parseInt(Memory.labels[arguments[i]]));
           break;
 
         case "m":
