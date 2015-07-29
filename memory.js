@@ -3,21 +3,25 @@
 /*
 
 TODO:
+- Add getters and setters for labels
+- Add getters and setters for data
 
 */
 
 var Memory = {
   address: 0x10010000,
 
+  // Create empty objects to attach data and labels to
   data: {},
 
   labels: {},
 
   ascii: {
     bytes: 1,
-    add: function(ascii_values) {
-      for(var i = 0; i < ascii_values.length; i++) {
-        Memory.data[Memory.address] = ascii_values[i].charCodeAt();
+    add: function(string) {
+      chars = string.split("");
+      for(var i = 1; i < chars.length - 1; i++) {
+        Memory.data[Memory.address] = chars[i].charCodeAt();
         Memory.address++;
       }
     }
@@ -25,9 +29,10 @@ var Memory = {
 
   asciiz: {
     bytes: 1,
-    add: function(ascii_values) {
-      for(var i = 0; i < ascii_values.length; i++) {
-        Memory.data[Memory.address] = ascii_values[i].charCodeAt();
+    add: function(string) {
+      chars = string.split("");
+      for(var i = 1; i < chars.length - 1; i++) {
+        Memory.data[Memory.address] = chars[i].charCodeAt();
         Memory.address++;
       }
 

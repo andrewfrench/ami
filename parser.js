@@ -112,31 +112,26 @@ var Parser = {
 
       var type, label, data;
 
-      if(data_element.indexOf(".ascii") >= 0) {
-        type = "ascii";
-        label = data_element.split(".ascii")[0].trim().replace(":", "");
-        data = data_element.split(".ascii")[1].trim();
-      }
-
+      // Check for asciiz first, only match one per line
       if(data_element.indexOf(".asciiz") >= 0) {
         type = "asciiz";
         label = data_element.split(".asciiz")[0].trim().replace(":", "");
         data = data_element.split(".asciiz")[1].trim();
-      }
-
-      if(data_element.indexOf(".byte") >= 0) {
+        console.log(label, data);
+      }else if(data_element.indexOf(".ascii") >= 0) {
+        type = "ascii";
+        label = data_element.split(".ascii")[0].trim().replace(":", "");
+        data = data_element.split(".ascii")[1].trim();
+        console.log(label, data);
+      }else if(data_element.indexOf(".byte") >= 0) {
         type = "byte";
         label = data_element.split(".byte")[0].trim().replace(":", "");
         data = data_element.split(".byte")[1].trim().split(",");
-      }
-
-      if(data_element.indexOf(".halfword") >= 0) {
+      }else if(data_element.indexOf(".halfword") >= 0) {
         type = "halfword";
         label = data_element.split(".halfword")[0].trim().replace(":", "");
         data = data_element.split(".halfword")[1].trim().split(",");
-      }
-
-      if(data_element.indexOf(".word") >= 0) {
+      }else if(data_element.indexOf(".word") >= 0) {
         type = "word";
         label = data_element.split(".word")[0].trim().replace(":", "");
         data = data_element.split(".word")[1].trim().split(",");
@@ -144,9 +139,13 @@ var Parser = {
 
       switch(type) {
         case "ascii":
+          Memory.labels[label] = Memory.location;
+          Memory.ascii.add(data);
           break;
 
         case "asciiz":
+          Memory.labels[label] = Memory.location;
+          Memory.asciiz.add(data);
           break;
 
         case "byte":
