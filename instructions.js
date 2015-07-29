@@ -366,9 +366,31 @@ var Instructions = {
     }
   },
 
-  // SLTIU
+  SLTIU: {
+    desc: "Set on less than immediate value (unsigned)",
+    arguments: 3,
+    argument_format: "rri",
+    operation: function(arguments) {
+      if(arguments[1].value < arguments[2]) {
+        arguments[0].value = 1;
+      } else {
+        arguments[0].value = 0;
+      }
+    }
+  },
 
-  // SLTU
+  SLTU: {
+    desc: "Set on less than (unsigned)",
+    arguments: 3,
+    argument_format: "rrr",
+    operation: function(arguments) {
+      if(arguments[1].value < arguments[2].value) {
+        arguments[0].value = 1;
+      } else {
+        arguments[0].value = 0;
+      }
+    }
+  },
 
   SRA: {
     desc: "Arithmetic shift right",
