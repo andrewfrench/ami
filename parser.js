@@ -57,9 +57,14 @@ var Parser = {
       // Pad commas with at least one confirmed space
       instruction_list[i] = instruction_list[i].replace(/,/g, ", ");
 
+      var instruction_elements;
+
       // Confirm that each line contains non-whitespace characters
       if(/\S/.test(instruction_list[i])) {
-        var instruction_elements = instruction_list[i].match(/\S+/g);
+        instruction_elements = instruction_list[i].match(/\S+/g);
+
+        // Convert instructions to upper case
+        instruction_elements[0] = instruction_elements[0].toUpperCase();
       } else {
         continue;
       }
