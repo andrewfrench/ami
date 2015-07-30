@@ -23,13 +23,11 @@ var Parser = {
     if(program_text.indexOf(".data") < program_text.indexOf(".text")) {
       // Data is defined before program
 
-      var regex = /.*\.data\s+(.*)\s+\.text.*/;
       data_element = program_text.split(".text")[0].replace(".data", "");
       text_element = program_text.split(".text")[1];
     } else {
       // Program is defined before data
 
-      var regex = /.*\.text\s+(.*)\s+\.data.*/;
       text_element = program_text.split(".data")[0].replace(".text", "");
       data_element = program_text.split(".data")[1];
     }
@@ -38,7 +36,7 @@ var Parser = {
     this.parse_text_element(text_element.split("\n"));
   },
 
-  parse_text_element(instruction_list) {
+  parse_text_element: function(instruction_list) {
     // Inspect each argument in order
     for(var i = 0; i < instruction_list.length; i++) {
 
@@ -99,7 +97,7 @@ var Parser = {
     }
   },
 
-  parse_data_element(data_list) {
+  parse_data_element: function(data_list) {
     for(var i = 0; i < data_list.length; i++) {
       // Check for a data type declaration
       // Only keep what's to the left of a comment delimiter
