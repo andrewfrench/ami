@@ -8,6 +8,14 @@ TODO:
 
 */
 
+document.getElementById("clear").onclick = function() {
+  Program.exit();
+  Registers.reinitialize();
+  Program.reinitialize();
+  Memory.reinitialize();
+  // console.clear();
+}
+
 document.getElementById("evaluate").onclick = function() {
   Program.exit();
   Registers.reinitialize();
