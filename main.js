@@ -13,7 +13,7 @@ document.getElementById("evaluate").onclick = function() {
   Registers.reinitialize();
   Program.reinitialize();
   Memory.reinitialize();
-  console.clear();
+  // console.clear();
 
   Parser.parse(document.getElementById("main").value);
 

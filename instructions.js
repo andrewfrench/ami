@@ -27,7 +27,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
-      arguments[0].value = 0xffffffff & (arguments[1].value + arguments[2]);
+      arguments[0].set_value(0xffffffff & (arguments[1].value + arguments[2]));
     }
   },
 
