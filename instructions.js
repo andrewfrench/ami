@@ -18,7 +18,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
-      arguments[0].value = 0xffffffff & (arguments[1].value + arguments[2].value);
+      arguments[0].set_value(0xffffffff & (arguments[1].value + arguments[2].value));
     }
   },
 
@@ -36,7 +36,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value + arguments[2];
+      arguments[0].set_value(arguments[1].value + arguments[2]);
     }
   },
 
@@ -45,7 +45,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value + arguments[2].value;
+      arguments[0].set_value(arguments[1].value + arguments[2].value);
     }
   },
 
@@ -54,7 +54,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value & arguments[2].value;
+      arguments[0].set_value(arguments[1].value & arguments[2].value);
     }
   },
 
@@ -86,7 +86,7 @@ var Instructions = {
     argument_format: "rl",
     operation: function(arguments) {
       if(arguments[0].value >= 0) {
-        Registers.$ra.value = Program.counter;
+        Registers.$ra.set_value(Program.counter);
 
         Program.counter = arguments[1] - 4;
       }
@@ -132,7 +132,7 @@ var Instructions = {
     argument_format: "rl",
     operation: function(arguments) {
       if(arguments[0].value < 0) {
-        Registers.$ra.value = Program.counter;
+        Registers.$ra.set_value(Program.counter);
 
         Program.counter = arguments[1] - 4;
       }
@@ -155,10 +155,10 @@ var Instructions = {
     arguments: 2,
     argument_format: "rr",
     operation: function(arguments) {
-      Registers.LO.value = Math.floor(arguments[0].value / arguments[1].value);
+      Registers.LO.set_value(Math.floor(arguments[0].value / arguments[1].value));
 
       // Truly a beautiful language
-      Registers.HI.value = ((arguments[0].value % arguments[1].value) + arguments[1].value) % arguments[1].value;
+      Registers.HI.set_value(((arguments[0].value % arguments[1].value) + arguments[1].value) % arguments[1].value);
     }
   },
 
@@ -167,8 +167,8 @@ var Instructions = {
     arguments: 2,
     argument_format: "rr",
     operation: function(arguments) {
-      Registers.LO.value = Math.floor(arguments[0].value / arguments[1].value);
-      Registers.HI.value = arguments[0].value % arguments[1].value;
+      Registers.LO.set_value(Math.floor(arguments[0].value / arguments[1].value));
+      Registers.HI.set_value(arguments[0].value % arguments[1].value);
     }
   },
 
@@ -187,7 +187,7 @@ var Instructions = {
     argument_format: "l",
     operation: function(arguments) {
       // PC is auto-incremented previously
-      Registers.$ra.value = Program.counter;
+      Registers.$ra.set_value(Program.counter);
 
       // Set new PC **after** using PC to store return address
       Program.counter = arguments[0] - 4;
@@ -208,7 +208,7 @@ var Instructions = {
     arguments: 2,
     argument_format: "rk",
     operation: function(arguments) {
-      arguments[0].value = arguments[1];
+      arguments[0].set_value(arguments[1]);
     }
   },
 
@@ -218,7 +218,7 @@ var Instructions = {
     argument_format: "rm",
     operation: function(arguments) {
       // arg[1] is offset, arg[2] is register
-      arguments[0].value = Memory.get_byte(arguments[1] + arguments[2].value);
+      arguments[0].set_value(Memory.get_byte(arguments[1] + arguments[2].value));
     }
   },
 
@@ -227,7 +227,7 @@ var Instructions = {
     arguments: 2,
     argument_format: "ri",
     operation: function(arguments) {
-      arguments[0].value = 0xffffffff & arguments[1];
+      arguments[0].set_value(0xffffffff & arguments[1]);
     }
   },
 
@@ -236,7 +236,7 @@ var Instructions = {
     arguments: 2,
     argument_format: "ri",
     operation: function(arguments) {
-      arguments[0].value = 0xffffffff & (arguments[1] << 16);
+      arguments[0].set_value(0xffffffff & (arguments[1] << 16));
     }
   },
 
@@ -245,7 +245,7 @@ var Instructions = {
     arguments: 2,
     argument_format: "rm",
     operation: function(arguments) {
-      arguments[0].value = Memory.get_word(arguments[1] + arguments[2].value);
+      arguments[0].set_value(Memory.get_word(arguments[1] + arguments[2].value));
     }
   },
 
@@ -254,7 +254,7 @@ var Instructions = {
     arguments: 1,
     argument_format: "r",
     operation: function(arguments) {
-      arguments[0].value = Registers.HI.value;
+      arguments[0].set_value(Registers.HI.value);
     }
   },
 
@@ -263,7 +263,7 @@ var Instructions = {
     arguments: 1,
     argument_format: "r",
     operation: function(arguments) {
-      arguments[0].value = Registers.LO.value;
+      arguments[0].set_value(Registers.LO.value);
     }
   },
 
@@ -272,7 +272,7 @@ var Instructions = {
     arguments: 2,
     argument_format: "rr",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value;
+      arguments[0].set_value(arguments[1].value);
     }
   },
 
@@ -281,7 +281,7 @@ var Instructions = {
     arguments: 2,
     argument_format: "rr",
     operation: function(arguments) {
-      Registers.LO.value = 0xffffffff & (arguments[0].value * arguments[1].value);
+      Registers.LO.set_value(0xffffffff & (arguments[0].value * arguments[1].value));
     }
   },
 
@@ -290,7 +290,7 @@ var Instructions = {
     arguments: 2,
     argument_format: "rr",
     operation: function(arguments) {
-      Registers.LO.value = 0xffffffff & (arguments[0].value * arguments[1].value);
+      Registers.LO.set_value(0xffffffff & (arguments[0].value * arguments[1].value));
     }
   },
 
@@ -308,7 +308,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value | arguments[2].value;
+      arguments[0].set_value(arguments[1].value | arguments[2].value);
     }
   },
 
@@ -317,7 +317,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value | arguments[2];
+      arguments[0].set_value(arguments[1].value | arguments[2]);
     }
   },
 
@@ -336,7 +336,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
-      arguments[0].value = 0xffffffff & (arguments[1].value << arguments[2]);
+      arguments[0].set_value(0xffffffff & (arguments[1].value << arguments[2]));
     }
   },
 
@@ -345,7 +345,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
-      arguments[0].value = 0xffffffff & (arguments[1].value << arguments[2].value);
+      arguments[0].set_value(0xffffffff & (arguments[1].value << arguments[2].value));
     }
   },
 
@@ -355,9 +355,9 @@ var Instructions = {
     argument_format: "rrr",
     operation: function(arguments) {
       if(arguments[1].value < arguments[2].value) {
-        arguments[0].value = 1;
+        arguments[0].set_value(1);
       } else {
-        arguments[0].value = 0;
+        arguments[0].set_value(0);
       }
     }
   },
@@ -368,9 +368,9 @@ var Instructions = {
     argument_format: "rri",
     operation: function(arguments) {
       if(arguments[1].value < arguments[2]) {
-        arguments[0].value = 1;
+        arguments[0].set_value(1);
       } else {
-        arguments[0].value = 0;
+        arguments[0].set_value(0);
       }
     }
   },
@@ -381,9 +381,9 @@ var Instructions = {
     argument_format: "rri",
     operation: function(arguments) {
       if(arguments[1].value < arguments[2]) {
-        arguments[0].value = 1;
+        arguments[0].set_value(1);
       } else {
-        arguments[0].value = 0;
+        arguments[0].set_value(0);
       }
     }
   },
@@ -394,9 +394,9 @@ var Instructions = {
     argument_format: "rrr",
     operation: function(arguments) {
       if(arguments[1].value < arguments[2].value) {
-        arguments[0].value = 1;
+        arguments[0].set_value(1);
       } else {
-        arguments[0].value = 0;
+        arguments[0].set_value(0);
       }
     }
   },
@@ -406,7 +406,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value >> arguments[2];
+      arguments[0].set_value(arguments[1].value >> arguments[2]);
     }
   },
 
@@ -415,7 +415,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value >>> arguments[2];
+      arguments[0].set_value(arguments[1].value >>> arguments[2]);
     }
   },
 
@@ -424,7 +424,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value >>> arguments[2].value;
+      arguments[0].set_value(arguments[1].value >>> arguments[2].value);
     }
   },
 
@@ -433,7 +433,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
-      arguments[0].value = 0xffffffff & (arguments[1].value - arguments[2].value);
+      arguments[0].set_value(0xffffffff & (arguments[1].value - arguments[2].value));
     }
   },
 
@@ -442,7 +442,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
-      arguments[0].value = 0xffffffff & (arguments[1].value - arguments[2].value);
+      arguments[0].set_value(0xffffffff & (arguments[1].value - arguments[2].value));
     }
   },
 
@@ -514,7 +514,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rrr",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value ^ arguments[2].value;
+      arguments[0].set_value(arguments[1].value ^ arguments[2].value);
     }
   },
 
@@ -523,7 +523,7 @@ var Instructions = {
     arguments: 3,
     argument_format: "rri",
     operation: function(arguments) {
-      arguments[0].value = arguments[1].value ^ arguments[2];
+      arguments[0].set_value(arguments[1].value ^ arguments[2]);
     }
   }
 };
