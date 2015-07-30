@@ -24,6 +24,7 @@ var Memory = {
         Memory.data[Memory.address] = chars[i].charCodeAt();
         Memory.address++;
       }
+      Memory.update_html();
     }
   },
 
@@ -38,6 +39,8 @@ var Memory = {
 
       Memory.data[Memory.address] = 0;
       Memory.address++;
+
+      Memory.update_html();
     }
   },
 
@@ -48,6 +51,7 @@ var Memory = {
         Memory.data[Memory.address] = parseInt(byte_values[i]);
         Memory.address++;
       }
+      Memory.update_html();
     }
   },
 
@@ -61,6 +65,7 @@ var Memory = {
         Memory.data[Memory.address] = 0x00ff & parseInt(halfword_values[i]);
         Memory.address++;
       }
+      Memory.update_html();
     }
   },
 
@@ -80,6 +85,7 @@ var Memory = {
         Memory.data[Memory.address] = 0x000000ff & parseInt(word_values[i]);
         Memory.address++;
       }
+      Memory.update_html();
     }
   },
 
@@ -90,6 +96,7 @@ var Memory = {
         Memory.data[Memory.address] = 0;
         Memory.address++;
       }
+      Memory.update_html();
     }
   },
 
@@ -121,11 +128,13 @@ var Memory = {
 
   store_byte: function(value, address) {
     Memory.data[address] = 0xff & value;
+    Memory.update_html();
   },
 
   store_halfword: function(value, address) {
     Memory.data[address] = 0xff00 & value;
     Memory.data[address + 1] = 0x00ff & value;
+    Memory.update_html();
   },
 
   store_word: function(value, address) {
@@ -133,11 +142,28 @@ var Memory = {
     Memory.data[address + 1] = (0x00ff0000 & value) >>> 16;
     Memory.data[address + 2] = (0x0000ff00 & value) >>> 8;
     Memory.data[address + 3] = 0x000000ff & value;
+    Memory.update_html();
   },
 
   reinitialize: function() {
     Memory.data = {};
     Memory.labels = {};
     Memory.address = 0x10010000;
+  },
+
+  update_html: function() {
+    // Update HTML indicated values of memory elements
+    var num_html_lines = document.getElementsByClassName("data").length;
+    var address = 0x10010000;
+    for(var i = 0; i < num_html_lines; i++) {
+      var html_element = document.getElementsByClassName("data")[i];
+      var inner_html = "";
+      for(var j = 0; j < 16; j++) {
+        var hex_string = Memory.get_byte(address).toString(16);
+        inner_html += Array(3 - hex_string.length).join("0") + hex_string + " ";
+        address++;
+      }
+      html_element.innerHTML = inner_html;
+    }
   }
 };
