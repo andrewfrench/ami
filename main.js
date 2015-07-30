@@ -9,18 +9,25 @@ TODO:
 */
 
 document.getElementById("evaluate").onclick = function() {
-  clearInterval(Program.execution_interval);
-  console.clear();
+  Program.exit();
   Registers.reinitialize();
   Program.reinitialize();
   Memory.reinitialize();
+  console.clear();
 
-  // var code_lines = document.getElementById("main").value.split("\n");
   Parser.parse(document.getElementById("main").value);
 
-  Program.execute();
-}
+  Program.enter_loop();
+};
 
 document.getElementById("stop").onclick = function() {
-  clearInterval(Program.execution_interval);
-}
+  Program.exit();
+};
+
+document.getElementById("step").onclick = function() {
+  Program.step();
+};
+
+document.getElementById("pause").onclick = function() {
+  Program.pause();
+};
