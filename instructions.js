@@ -65,6 +65,7 @@ var Instructions = {
     operation: function(arguments) {
       if(arguments[0].value == arguments[1].value) {
         Program.counter = arguments[2] - 4;
+        Registers.PC.set_value(Program.counter);
       }
     }
   },
@@ -76,6 +77,7 @@ var Instructions = {
     operation: function(arguments) {
       if(arguments[0].value >= 0) {
         Program.counter = arguments[1] - 4;
+        Registers.PC.set_value(Program.counter);
       }
     }
   },
@@ -89,6 +91,7 @@ var Instructions = {
         Registers.$ra.set_value(Program.counter);
 
         Program.counter = arguments[1] - 4;
+        Registers.PC.set_value(Program.counter);
       }
     }
   },
@@ -100,6 +103,7 @@ var Instructions = {
     operation: function(arguments) {
       if(arguments[0].value > 0) {
         Program.counter = arguments[1] - 4;
+        Registers.PC.set_value(Program.counter);
       }
     }
   },
@@ -111,6 +115,7 @@ var Instructions = {
     operation: function(arguments) {
       if(arguments[0].value <= 0) {
         Program.counter = arguments[1] - 4;
+        Registers.PC.set_value(Program.counter);
       }
     }
   },
@@ -122,6 +127,7 @@ var Instructions = {
     operation: function(arguments) {
       if(arguments[0].value < 0) {
         Program.counter = arguments[1] - 4;
+        Registers.PC.set_value(Program.counter);
       }
     }
   },
@@ -135,6 +141,7 @@ var Instructions = {
         Registers.$ra.set_value(Program.counter);
 
         Program.counter = arguments[1] - 4;
+        Registers.PC.set_value(Program.counter);
       }
     }
   },
@@ -146,6 +153,7 @@ var Instructions = {
     operation: function(arguments) {
       if(arguments[0].value != arguments[1].value) {
         Program.counter = arguments[2] - 4;
+        Registers.PC.set_value(Program.counter);
       }
     }
   },
@@ -178,6 +186,7 @@ var Instructions = {
     argument_format: "l",
     operation: function(arguments) {
       Program.counter = arguments[0] - 4;
+      Registers.PC.set_value(Program.counter);
     }
   },
 
@@ -191,6 +200,7 @@ var Instructions = {
 
       // Set new PC **after** using PC to store return address
       Program.counter = arguments[0] - 4;
+      Registers.PC.set_value(Program.counter);
     }
   },
 
@@ -200,6 +210,7 @@ var Instructions = {
     argument_format: "r",
     operation: function(arguments) {
       Program.counter = arguments[0].value - 4;
+      Regsiters.PC.set_value(Program.counter);
     }
   },
 
