@@ -44,7 +44,7 @@ textarea#main {
 
 textarea#console {
   width: 100%;
-  height: 100px;
+  height: 140px;
   resize: none;
   font-size: inherit;
   font-family: "Droid Sans Mono", monospace;
