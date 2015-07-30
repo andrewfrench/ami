@@ -5,8 +5,6 @@
 TODO:
 - Create error checks for each instruction, to populate HTML error element
 - Add instructions that deal with memory locations
-- Change to a Instruction class structure
-  - Update HTML register indicators when changed, avoiding loops
 
 */
 

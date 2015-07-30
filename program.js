@@ -3,8 +3,7 @@
 /*
 
 TODO:
-- Add structure for memory elements
-- Handle HTML updates when registers are changed, avoiding loops
+
 
 */
 

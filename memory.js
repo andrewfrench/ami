@@ -3,8 +3,6 @@
 /*
 
 TODO:
-- Add getters and setters for labels
-- Add getters and setters for data
 
 */
 
