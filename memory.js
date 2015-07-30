@@ -149,6 +149,7 @@ var Memory = {
     Memory.data = {};
     Memory.labels = {};
     Memory.address = 0x10010000;
+    Memory.update_html();
   },
 
   update_html: function() {
