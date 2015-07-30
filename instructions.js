@@ -456,7 +456,58 @@ var Instructions = {
     }
   },
 
-  // SYSCALL
+  SYSCALL: {
+    desc: "Generates a software interrupt",
+    arguments: 0,
+    argument_format: "",
+    operation: function(arguments) {
+      // Look up current value of $v0
+      switch(Registers.$v0.value) {
+        case 1:
+          console.log("This system call is not yet implemented.");
+          break;
+
+        case 2:
+          console.log("This system call is not yet implemented.");
+          break;
+
+        case 3:
+          console.log("This system call is not yet implemented.");
+          break;
+
+        case 4:
+          console.log("This system call is not yet implemented.");
+          break;
+
+        case 5:
+          console.log("This system call is not yet implemented.");
+          break;
+
+        case 6:
+          console.log("This system call is not yet implemented.");
+          break;
+
+        case 7:
+          console.log("This system call is not yet implemented.");
+          break;
+
+        case 8:
+          console.log("This system call is not yet implemented.");
+          break;
+
+        case 9:
+          console.log("This system call is not yet implemented.");
+          break;
+
+        case 10:
+          Program.exit();
+          break;
+
+        default:
+          console.log("The value of $v0 in a system call must be between 1 and 10.");
+      }
+    }
+  },
 
   XOR: {
     desc: "Bitwise exclusive or",

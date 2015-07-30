@@ -59,6 +59,11 @@ var Program = {
     }, 80);
   },
 
+  exit: function() {
+    clearInterval(this.execution_interval);
+    console.log("Program exited by SYSCALL.");
+  },
+
   reinitialize: function() {
     this.counter = 0x00400000;
     this.instructions = {};
