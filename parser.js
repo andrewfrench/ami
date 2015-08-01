@@ -60,10 +60,19 @@ var Parser = {
       instruction = this.pad(instruction);
 
       // Separate instruction elements by whitespace
+      console.log(instruction);
       instruction_elements = instruction.match(/\S+/g);
+      console.log(instruction_elements);
 
-      // Convert instructions to upper case
-      instruction_elements[0] = instruction_elements[0].toUpperCase();
+      // Check for empty lines here, too - it'll be null if not
+
+      // Skip empty lines
+      if(!/\S/.test(instruction)) {
+        continue;
+      } else {
+        // Convert instructions to upper case
+        instruction_elements[0] = instruction_elements[0].toUpperCase();
+      }
 
       // Remove commas from instruction, instruction delimited by whitespace.
       this.strip_commas(instruction_elements);
@@ -162,7 +171,7 @@ var Parser = {
   pad: function(instruction) {
     // Guarantee a space after each comma
     return instruction.replace(/,/g, ", ");
-  }
+  },
 
   handle_labels: function(instruction) {
     // Split labels from instructions that share a line
