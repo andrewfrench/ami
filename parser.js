@@ -72,10 +72,6 @@ var Parser = {
       // Remove commas from instruction, instruction delimited by whitespace.
       this.strip_commas_from_instruction(instruction_elements);
 
-      if(!this.check_instruction_validity(instruction_elements[0])) {
-        continue;
-      }
-
       if(!this.check_instruction_implementation(instruction_elements[0])) {
         continue;
       }
@@ -172,15 +168,6 @@ var Parser = {
     for(var j = 0; j < instruction_elements.length; j++) {
       instruction_elements[j] = instruction_elements[j].replace(",", "");
     }
-  },
-
-  check_instruction_validity: function(instruction) {
-    // Check that the instruction is valid and recognized
-    if(valid_instruction_list.indexOf(instruction) < 0) {
-      console.log(instruction + " is not a valid instruction.");
-      return false;
-    }
-    return true;
   },
 
   check_instruction_implementation: function(instruction) {
