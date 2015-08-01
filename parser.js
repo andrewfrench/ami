@@ -17,66 +17,62 @@ TODO:
 
 var Parser = {
   parse: function(program_text) {
+    // Define variables to hold data element and text elements
     var data_element, text_element;
 
     // Split the data elements from the text elements
     if(program_text.indexOf(".data") < program_text.indexOf(".text")) {
-      // Data is defined before program
+      // Data section is defined before program
 
       data_element = program_text.split(".text")[0].replace(".data", "");
       text_element = program_text.split(".text")[1];
     } else {
-      // Program is defined before data
+      // Program section is defined before data
 
       text_element = program_text.split(".data")[0].replace(".text", "");
       data_element = program_text.split(".data")[1];
     }
 
+    // Send data and text elements to their respective parsers
     this.parse_data_element(data_element.split("\n"));
     this.parse_text_element(text_element.split("\n"));
   },
 
-  parse_text_element: function(instruction_list) {
+  parse_text_element: function(instructions) {
     // Inspect each argument in order
-    for(var i = 0; i < instruction_list.length; i++) {
+    for(var i = 0; i < instructions.length; i++) {
 
-      // Remove commented out portions of lines
-      var comment_delimited_chunks = instruction_list[i].split("#");
-
-      // Only keep portions to the left of any comment delimiters.
-      instruction_list[i] = comment_delimited_chunks[0];
-
-      // Split labels from instructions that share a line
-      var label_chunks = instruction_list[i].split(":");
-
-      if(label_chunks.length > 1) {
-        Program.add_label(label_chunks[0]);
-        instruction_list[i] = label_chunks[1];
-      }
-
-      // Pad commas with at least one confirmed space
-      instruction_list[i] = instruction_list[i].replace(/,/g, ", ");
-
+      var instruction = instructions[i];
       var instruction_elements;
 
-      // Confirm that each line contains non-whitespace characters
-      if(/\S/.test(instruction_list[i])) {
-        instruction_elements = instruction_list[i].match(/\S+/g);
-
-        // Convert instructions to upper case
-        instruction_elements[0] = instruction_elements[0].toUpperCase();
-      } else {
+      // Skip empty lines
+      if(!/\S/.test(instruction)) {
         continue;
       }
+
+      // Remove comments from instruction
+      instruction = this.strip_comments(instruction);
+
+      // Handle labels and remove them from instruction
+      instruction = this.handle_labels(instruction);
+
+      // Pad commas with at least one space
+      instruction = this.pad(instruction);
+
+      // Separate instruction elements by whitespace
+      instruction_elements = instruction.match(/\S+/g);
+
+      // Convert instructions to upper case
+      instruction_elements[0] = instruction_elements[0].toUpperCase();
 
       // Remove commas from instruction, instruction delimited by whitespace.
-      this.strip_commas_from_instruction(instruction_elements);
+      this.strip_commas(instruction_elements);
 
-      if(!this.check_instruction_implementation(instruction_elements[0])) {
+      if(!this.check_implementation(instruction_elements[0])) {
         continue;
       }
 
-      if(!this.check_instruction_arguments(instruction_elements)) {
+      if(!this.check_arguments(instruction_elements)) {
         continue;
       }
 
@@ -163,14 +159,38 @@ var Parser = {
     }
   },
 
-  strip_commas_from_instruction: function(instruction_elements) {
+  pad: function(instruction) {
+    // Guarantee a space after each comma
+    return instruction.replace(/,/g, ", ");
+  }
+
+  handle_labels: function(instruction) {
+    // Split labels from instructions that share a line
+    var label_chunks = instruction.split(":");
+
+    if(label_chunks.length > 1) {
+      Program.add_label(label_chunks[0]);
+      instruction = label_chunks[1];
+    }
+
+    return instruction;
+  },
+
+  strip_comments: function(instruction) {
+    // Split the line on comment delimiters (#)
+    // If a line doesn't contain a comment, split
+    // will return an array with one element.
+    return instruction.split("#")[0];
+  },
+
+  strip_commas: function(instruction_elements) {
     // Remove commas from instruction
     for(var j = 0; j < instruction_elements.length; j++) {
       instruction_elements[j] = instruction_elements[j].replace(",", "");
     }
   },
 
-  check_instruction_implementation: function(instruction) {
+  check_implementation: function(instruction) {
     // Check that instruction has been implemented before evaluating
     if(Instructions[instruction] == undefined) {
       console.log(instruction + " has not yet been implemented.");
@@ -179,7 +199,7 @@ var Parser = {
     return true;
   },
 
-  check_instruction_arguments: function(instruction_elements) {
+  check_arguments: function(instruction_elements) {
     // Check that the correct number of arguments have been supplied
     if(instruction_elements.length - 1 != Instructions[instruction_elements[0]].arguments) {
       console.log(instruction_elements[0] + ": incorrect number of arguments.");
