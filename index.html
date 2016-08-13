@@ -23,11 +23,75 @@ TODO:
   <div id="container">
     <div id="input">
       <textarea id="main" spellcheck="false">.data
-# Your data here
+# This example searches for the peak
+# number in the Collatz series for each
+# number, beginning at 2.
+# The peak number is stored in $s3, the
+# number of iterations is stored in $s2,
+# and the number being evaluated is in $s0.
+
+.data
 
 .text
 main:
-# Your program here
+
+  # load registers with constants
+  ADDI $t0, $t0, 3
+  ADDI $t1, $t1, 2
+  ADDI $t2, $t2, 1
+
+  # $s0 will hold our test value, starting at 2
+  ADDI $s0, $s0, 2
+
+  # Move the initial value to the
+  # operation register
+  MOVE $s1, $s0
+
+  # Move the initial value to the peak
+  MOVE $s3, $s0
+
+collatz:
+  # Check for our end state
+  BEQ $s1, $t2, done
+
+  # Check if we've hit a peak
+  SUB $t4, $s1, $s3
+  BLEZ $t4, notpeak
+  MOVE $s3, $s1
+  J collatz
+
+notpeak:
+  # Increment $s2, our iteration counter
+  ADDI $s2, $s2, 1
+
+  # Check if number is even or odd
+  # If odd, $t3 > 0
+  AND $t3, $s1, $t2
+  BGTZ $t3, odd
+
+  # If we're here, it's even
+  DIV $s1, $t1
+  MFLO $s1
+  J collatz
+
+odd:
+  # Multiply by three and add one
+  MULT $s1, $t0
+  MFLO $s1
+  ADDI $s1, $s1, 1
+  J collatz
+
+done:
+  # We've hit the end state for that input.
+  # Increment the test value.
+  ADD $s0, $s0, $t2
+
+  # Move the test value to the
+  # operating register to be manipulated
+  MOVE $s1, $s0
+
+  # Begin the loop
+  J collatz
 </textarea>
       <button id="evaluate">Evaluate</button>
       <button id="step">Step</button>
